@@ -178,11 +178,9 @@ export function registerRoutes(app: FastifyInstance, deps: RouteDeps): void {
     // TODO(P2/P3): render the op log to PNG (cached per opSeq, 1/s per session).
     const actor = rooms.get(req.params.code.toUpperCase());
     if (!actor) throw new HttpError(404, "ROOM_NOT_FOUND", "room not found");
-    return reply
-      .status(501)
-      .send({
-        error: { code: "INTERNAL", message: "canvas rendering not implemented in Phase 1" },
-      });
+    return reply.status(501).send({
+      error: { code: "INTERNAL", message: "canvas rendering not implemented in Phase 1" },
+    });
   });
 
   // --- leaderboard ----------------------------------------------------------

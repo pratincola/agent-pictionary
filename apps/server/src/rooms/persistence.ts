@@ -182,16 +182,14 @@ export class Persistence {
           }
           for (let i = 0; i < record.ops.length; i += 500) {
             const chunk = record.ops.slice(i, i + 500);
-            await tx
-              .insert(schema.drawOps)
-              .values(
-                chunk.map((e) => ({
-                  roundId,
-                  opSeq: e.opSeq,
-                  op: e.op,
-                  erased: e.erased ?? false,
-                })),
-              );
+            await tx.insert(schema.drawOps).values(
+              chunk.map((e) => ({
+                roundId,
+                opSeq: e.opSeq,
+                op: e.op,
+                erased: e.erased ?? false,
+              })),
+            );
           }
           for (const [agentId, s] of Object.entries(record.scores)) {
             await tx
