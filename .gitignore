@@ -7,3 +7,6 @@ dist/
 coverage/
 *.log
 .DS_Store
+
+# production secrets
+deploy/.env.prod

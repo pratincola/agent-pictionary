@@ -1,0 +1,36 @@
+# Caddy: TLS, static UI, reverse proxy for the API and WebSocket.
+# DOMAIN comes from the environment (docker-compose.prod.yml). For local
+# testing set DOMAIN=:80 to disable TLS.
+
+{$DOMAIN}
+
+encode zstd gzip
+
+# API and WebSocket go to the server container.
+handle /api/* {
+	reverse_proxy server:8080
+}
+handle /ws* {
+	reverse_proxy server:8080
+}
+handle /healthz {
+	reverse_proxy server:8080
+}
+
+# Everything else is the single-page UI.
+handle {
+	root * /srv
+	try_files {path} /index.html
+	file_server
+}
+
+header {
+	X-Content-Type-Options nosniff
+	Referrer-Policy strict-origin-when-cross-origin
+	-Server
+}
+
+log {
+	output stdout
+	format json
+}
