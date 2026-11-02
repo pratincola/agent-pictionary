@@ -1,0 +1,30 @@
+{
+  "name": "@pictionary/render",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Rasterizes a Pictionary op log to PNG. Shared by the SDK (local VLM snapshots) and the server (GET /rooms/:code/canvas.png).",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b && tsc -p tsconfig.test.json",
+    "lint": "biome check .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "1.1.0",
+    "@pictionary/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "5.0.5"
+  }
+}
