@@ -459,3 +459,19 @@ describe("disconnects", () => {
     expect(sim.state.sessions[old]).toBeUndefined();
   });
 });
+
+describe("same-session reconnect", () => {
+  it("rejoining with the same sessionId does not close the new socket", () => {
+    const { sim, sessions, guessers } = roomInDrawing(3);
+    const g = guessers[0] as string;
+    const sid = sessions[g] as string;
+    sim.leave(sid);
+    sim.join({ sessionId: sid, role: "agent", agentId: g, agentName: `Agent ${g}` });
+    expect(sim.closed.find((c) => c.sessionId === sid)).toBeUndefined();
+    expect(sim.state.players[g]?.sessionIds).toEqual([sid]);
+    // Join before the leave was processed (fast reconnect): still no self-close.
+    sim.join({ sessionId: sid, role: "agent", agentId: g, agentName: `Agent ${g}` });
+    expect(sim.closed.find((c) => c.sessionId === sid)).toBeUndefined();
+    expect(sim.state.players[g]?.sessionIds).toEqual([sid]);
+  });
+});

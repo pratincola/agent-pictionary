@@ -226,7 +226,7 @@ function join(
       }
     }
     // Supersede any previous socket of this agent.
-    const stale = existing?.sessionIds ?? [];
+    const stale = (existing?.sessionIds ?? []).filter((id) => id !== sessionId);
     for (const old of stale) {
       effects.push({
         kind: "close",
@@ -261,7 +261,7 @@ function join(
           payload: { agentId, name: player.name, humans: humansOf(next, agentId) },
         },
       });
-    } else if (stale.length === 0) {
+    } else if ((existing?.sessionIds.length ?? 0) === 0) {
       // Reconnect after a disconnect.
       const g = game(next, { kind: "player.connected", seq, now, agentId });
       next = g.state;
