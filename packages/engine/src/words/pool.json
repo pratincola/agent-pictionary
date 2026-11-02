@@ -1,0 +1,1569 @@
+{
+  "version": 1,
+  "words": [
+    {
+      "word": "cat",
+      "difficulty": "easy"
+    },
+    {
+      "word": "dog",
+      "difficulty": "easy"
+    },
+    {
+      "word": "sun",
+      "difficulty": "easy"
+    },
+    {
+      "word": "moon",
+      "difficulty": "easy"
+    },
+    {
+      "word": "star",
+      "difficulty": "easy"
+    },
+    {
+      "word": "tree",
+      "difficulty": "easy"
+    },
+    {
+      "word": "house",
+      "difficulty": "easy"
+    },
+    {
+      "word": "car",
+      "difficulty": "easy"
+    },
+    {
+      "word": "fish",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bird",
+      "difficulty": "easy"
+    },
+    {
+      "word": "apple",
+      "difficulty": "easy"
+    },
+    {
+      "word": "banana",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ball",
+      "difficulty": "easy"
+    },
+    {
+      "word": "book",
+      "difficulty": "easy"
+    },
+    {
+      "word": "chair",
+      "difficulty": "easy"
+    },
+    {
+      "word": "table",
+      "difficulty": "easy"
+    },
+    {
+      "word": "door",
+      "difficulty": "easy"
+    },
+    {
+      "word": "window",
+      "difficulty": "easy"
+    },
+    {
+      "word": "hat",
+      "difficulty": "easy"
+    },
+    {
+      "word": "shoe",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cup",
+      "difficulty": "easy"
+    },
+    {
+      "word": "spoon",
+      "difficulty": "easy"
+    },
+    {
+      "word": "fork",
+      "difficulty": "easy"
+    },
+    {
+      "word": "key",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bed",
+      "difficulty": "easy"
+    },
+    {
+      "word": "clock",
+      "difficulty": "easy"
+    },
+    {
+      "word": "flower",
+      "difficulty": "easy"
+    },
+    {
+      "word": "boat",
+      "difficulty": "easy"
+    },
+    {
+      "word": "flag",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cloud",
+      "difficulty": "easy"
+    },
+    {
+      "word": "rain",
+      "difficulty": "easy"
+    },
+    {
+      "word": "snow",
+      "difficulty": "easy"
+    },
+    {
+      "word": "heart",
+      "difficulty": "easy"
+    },
+    {
+      "word": "egg",
+      "difficulty": "easy"
+    },
+    {
+      "word": "pizza",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cake",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bread",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cheese",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ice cream",
+      "difficulty": "easy",
+      "aliases": ["icecream"]
+    },
+    {
+      "word": "snake",
+      "difficulty": "easy"
+    },
+    {
+      "word": "frog",
+      "difficulty": "easy"
+    },
+    {
+      "word": "duck",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cow",
+      "difficulty": "easy"
+    },
+    {
+      "word": "pig",
+      "difficulty": "easy"
+    },
+    {
+      "word": "horse",
+      "difficulty": "easy"
+    },
+    {
+      "word": "sheep",
+      "difficulty": "easy"
+    },
+    {
+      "word": "mouse",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bear",
+      "difficulty": "easy"
+    },
+    {
+      "word": "lion",
+      "difficulty": "easy"
+    },
+    {
+      "word": "fox",
+      "difficulty": "easy"
+    },
+    {
+      "word": "owl",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bee",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ant",
+      "difficulty": "easy"
+    },
+    {
+      "word": "spider",
+      "difficulty": "easy"
+    },
+    {
+      "word": "butterfly",
+      "difficulty": "easy"
+    },
+    {
+      "word": "turtle",
+      "difficulty": "easy"
+    },
+    {
+      "word": "whale",
+      "difficulty": "easy"
+    },
+    {
+      "word": "shark",
+      "difficulty": "easy"
+    },
+    {
+      "word": "crab",
+      "difficulty": "easy"
+    },
+    {
+      "word": "hand",
+      "difficulty": "easy"
+    },
+    {
+      "word": "eye",
+      "difficulty": "easy"
+    },
+    {
+      "word": "nose",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ear",
+      "difficulty": "easy"
+    },
+    {
+      "word": "mouth",
+      "difficulty": "easy"
+    },
+    {
+      "word": "tooth",
+      "difficulty": "easy"
+    },
+    {
+      "word": "foot",
+      "difficulty": "easy"
+    },
+    {
+      "word": "leg",
+      "difficulty": "easy"
+    },
+    {
+      "word": "arm",
+      "difficulty": "easy"
+    },
+    {
+      "word": "smile",
+      "difficulty": "easy"
+    },
+    {
+      "word": "face",
+      "difficulty": "easy"
+    },
+    {
+      "word": "finger",
+      "difficulty": "easy"
+    },
+    {
+      "word": "pen",
+      "difficulty": "easy"
+    },
+    {
+      "word": "pencil",
+      "difficulty": "easy"
+    },
+    {
+      "word": "phone",
+      "difficulty": "easy",
+      "aliases": ["telephone"]
+    },
+    {
+      "word": "computer",
+      "difficulty": "easy"
+    },
+    {
+      "word": "tv",
+      "difficulty": "easy",
+      "aliases": ["television"]
+    },
+    {
+      "word": "lamp",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bell",
+      "difficulty": "easy"
+    },
+    {
+      "word": "drum",
+      "difficulty": "easy"
+    },
+    {
+      "word": "guitar",
+      "difficulty": "easy"
+    },
+    {
+      "word": "piano",
+      "difficulty": "easy"
+    },
+    {
+      "word": "kite",
+      "difficulty": "easy"
+    },
+    {
+      "word": "balloon",
+      "difficulty": "easy"
+    },
+    {
+      "word": "gift",
+      "difficulty": "easy",
+      "aliases": ["present"]
+    },
+    {
+      "word": "candle",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ring",
+      "difficulty": "easy"
+    },
+    {
+      "word": "crown",
+      "difficulty": "easy"
+    },
+    {
+      "word": "train",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bus",
+      "difficulty": "easy"
+    },
+    {
+      "word": "plane",
+      "difficulty": "easy",
+      "aliases": ["airplane", "aeroplane"]
+    },
+    {
+      "word": "bicycle",
+      "difficulty": "easy",
+      "aliases": ["bike"]
+    },
+    {
+      "word": "rocket",
+      "difficulty": "easy"
+    },
+    {
+      "word": "truck",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ship",
+      "difficulty": "easy"
+    },
+    {
+      "word": "tent",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bridge",
+      "difficulty": "easy"
+    },
+    {
+      "word": "road",
+      "difficulty": "easy"
+    },
+    {
+      "word": "mountain",
+      "difficulty": "easy"
+    },
+    {
+      "word": "river",
+      "difficulty": "easy"
+    },
+    {
+      "word": "beach",
+      "difficulty": "easy"
+    },
+    {
+      "word": "island",
+      "difficulty": "easy"
+    },
+    {
+      "word": "volcano",
+      "difficulty": "easy"
+    },
+    {
+      "word": "sock",
+      "difficulty": "easy"
+    },
+    {
+      "word": "glove",
+      "difficulty": "easy"
+    },
+    {
+      "word": "scarf",
+      "difficulty": "easy"
+    },
+    {
+      "word": "shirt",
+      "difficulty": "easy"
+    },
+    {
+      "word": "pants",
+      "difficulty": "easy",
+      "aliases": ["trousers"]
+    },
+    {
+      "word": "dress",
+      "difficulty": "easy"
+    },
+    {
+      "word": "umbrella",
+      "difficulty": "easy"
+    },
+    {
+      "word": "glasses",
+      "difficulty": "easy"
+    },
+    {
+      "word": "watch",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bag",
+      "difficulty": "easy"
+    },
+    {
+      "word": "box",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ladder",
+      "difficulty": "easy"
+    },
+    {
+      "word": "hammer",
+      "difficulty": "easy"
+    },
+    {
+      "word": "nail",
+      "difficulty": "easy"
+    },
+    {
+      "word": "saw",
+      "difficulty": "easy"
+    },
+    {
+      "word": "carrot",
+      "difficulty": "easy"
+    },
+    {
+      "word": "corn",
+      "difficulty": "easy"
+    },
+    {
+      "word": "grape",
+      "difficulty": "easy"
+    },
+    {
+      "word": "lemon",
+      "difficulty": "easy"
+    },
+    {
+      "word": "orange",
+      "difficulty": "easy"
+    },
+    {
+      "word": "pear",
+      "difficulty": "easy"
+    },
+    {
+      "word": "strawberry",
+      "difficulty": "easy"
+    },
+    {
+      "word": "watermelon",
+      "difficulty": "easy"
+    },
+    {
+      "word": "mushroom",
+      "difficulty": "easy"
+    },
+    {
+      "word": "cookie",
+      "difficulty": "easy"
+    },
+    {
+      "word": "candy",
+      "difficulty": "easy"
+    },
+    {
+      "word": "donut",
+      "difficulty": "easy",
+      "aliases": ["doughnut"]
+    },
+    {
+      "word": "hamburger",
+      "difficulty": "easy",
+      "aliases": ["burger"]
+    },
+    {
+      "word": "hot dog",
+      "difficulty": "easy",
+      "aliases": ["hotdog"]
+    },
+    {
+      "word": "leaf",
+      "difficulty": "easy"
+    },
+    {
+      "word": "grass",
+      "difficulty": "easy"
+    },
+    {
+      "word": "fire",
+      "difficulty": "easy"
+    },
+    {
+      "word": "water",
+      "difficulty": "easy"
+    },
+    {
+      "word": "rock",
+      "difficulty": "easy"
+    },
+    {
+      "word": "stone",
+      "difficulty": "easy"
+    },
+    {
+      "word": "bone",
+      "difficulty": "easy"
+    },
+    {
+      "word": "skull",
+      "difficulty": "easy"
+    },
+    {
+      "word": "ghost",
+      "difficulty": "easy"
+    },
+    {
+      "word": "robot",
+      "difficulty": "easy"
+    },
+    {
+      "word": "alien",
+      "difficulty": "easy"
+    },
+    {
+      "word": "king",
+      "difficulty": "easy"
+    },
+    {
+      "word": "queen",
+      "difficulty": "easy"
+    },
+    {
+      "word": "baby",
+      "difficulty": "easy"
+    },
+    {
+      "word": "angel",
+      "difficulty": "easy"
+    },
+    {
+      "word": "elephant",
+      "difficulty": "medium"
+    },
+    {
+      "word": "giraffe",
+      "difficulty": "medium"
+    },
+    {
+      "word": "kangaroo",
+      "difficulty": "medium"
+    },
+    {
+      "word": "penguin",
+      "difficulty": "medium"
+    },
+    {
+      "word": "dolphin",
+      "difficulty": "medium"
+    },
+    {
+      "word": "octopus",
+      "difficulty": "medium"
+    },
+    {
+      "word": "zebra",
+      "difficulty": "medium"
+    },
+    {
+      "word": "camel",
+      "difficulty": "medium"
+    },
+    {
+      "word": "monkey",
+      "difficulty": "medium"
+    },
+    {
+      "word": "parrot",
+      "difficulty": "medium"
+    },
+    {
+      "word": "flamingo",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hedgehog",
+      "difficulty": "medium"
+    },
+    {
+      "word": "squirrel",
+      "difficulty": "medium"
+    },
+    {
+      "word": "lobster",
+      "difficulty": "medium"
+    },
+    {
+      "word": "jellyfish",
+      "difficulty": "medium"
+    },
+    {
+      "word": "castle",
+      "difficulty": "medium"
+    },
+    {
+      "word": "lighthouse",
+      "difficulty": "medium"
+    },
+    {
+      "word": "windmill",
+      "difficulty": "medium"
+    },
+    {
+      "word": "skyscraper",
+      "difficulty": "medium"
+    },
+    {
+      "word": "pyramid",
+      "difficulty": "medium"
+    },
+    {
+      "word": "igloo",
+      "difficulty": "medium"
+    },
+    {
+      "word": "barn",
+      "difficulty": "medium"
+    },
+    {
+      "word": "church",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hospital",
+      "difficulty": "medium"
+    },
+    {
+      "word": "school",
+      "difficulty": "medium"
+    },
+    {
+      "word": "library",
+      "difficulty": "medium"
+    },
+    {
+      "word": "stadium",
+      "difficulty": "medium"
+    },
+    {
+      "word": "farm",
+      "difficulty": "medium"
+    },
+    {
+      "word": "zoo",
+      "difficulty": "medium"
+    },
+    {
+      "word": "circus",
+      "difficulty": "medium"
+    },
+    {
+      "word": "helicopter",
+      "difficulty": "medium"
+    },
+    {
+      "word": "submarine",
+      "difficulty": "medium"
+    },
+    {
+      "word": "tractor",
+      "difficulty": "medium"
+    },
+    {
+      "word": "scooter",
+      "difficulty": "medium"
+    },
+    {
+      "word": "skateboard",
+      "difficulty": "medium"
+    },
+    {
+      "word": "canoe",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hot air balloon",
+      "difficulty": "medium",
+      "aliases": ["hot-air balloon"]
+    },
+    {
+      "word": "sailboat",
+      "difficulty": "medium"
+    },
+    {
+      "word": "ambulance",
+      "difficulty": "medium"
+    },
+    {
+      "word": "fire truck",
+      "difficulty": "medium",
+      "aliases": ["firetruck", "fire engine"]
+    },
+    {
+      "word": "telescope",
+      "difficulty": "medium"
+    },
+    {
+      "word": "microscope",
+      "difficulty": "medium"
+    },
+    {
+      "word": "compass",
+      "difficulty": "medium"
+    },
+    {
+      "word": "anchor",
+      "difficulty": "medium"
+    },
+    {
+      "word": "magnet",
+      "difficulty": "medium"
+    },
+    {
+      "word": "trophy",
+      "difficulty": "medium"
+    },
+    {
+      "word": "medal",
+      "difficulty": "medium"
+    },
+    {
+      "word": "treasure chest",
+      "difficulty": "medium",
+      "aliases": ["treasure"]
+    },
+    {
+      "word": "globe",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hourglass",
+      "difficulty": "medium"
+    },
+    {
+      "word": "calculator",
+      "difficulty": "medium"
+    },
+    {
+      "word": "toothbrush",
+      "difficulty": "medium"
+    },
+    {
+      "word": "hairdryer",
+      "difficulty": "medium",
+      "aliases": ["hair dryer"]
+    },
+    {
+      "word": "vacuum cleaner",
+      "difficulty": "medium",
+      "aliases": ["vacuum"]
+    },
+    {
+      "word": "toaster",
+      "difficulty": "medium"
+    },
+    {
+      "word": "blender",
+      "difficulty": "medium"
+    },
+    {
+      "word": "washing machine",
+      "difficulty": "medium",
+      "aliases": ["washer"]
+    },
+    {
+      "word": "microwave",
+      "difficulty": "medium"
+    },
+    {
+      "word": "refrigerator",
+      "difficulty": "medium",
+      "aliases": ["fridge"]
+    },
+    {
+      "word": "kettle",
+      "difficulty": "medium"
+    },
+    {
+      "word": "sandwich",
+      "difficulty": "medium"
+    },
+    {
+      "word": "spaghetti",
+      "difficulty": "medium"
+    },
+    {
+      "word": "sushi",
+      "difficulty": "medium"
+    },
+    {
+      "word": "taco",
+      "difficulty": "medium"
+    },
+    {
+      "word": "pancake",
+      "difficulty": "medium"
+    },
+    {
+      "word": "popcorn",
+      "difficulty": "medium"
+    },
+    {
+      "word": "pretzel",
+      "difficulty": "medium"
+    },
+    {
+      "word": "lollipop",
+      "difficulty": "medium"
+    },
+    {
+      "word": "cupcake",
+      "difficulty": "medium"
+    },
+    {
+      "word": "noodles",
+      "difficulty": "medium"
+    },
+    {
+      "word": "tornado",
+      "difficulty": "medium"
+    },
+    {
+      "word": "lightning",
+      "difficulty": "medium"
+    },
+    {
+      "word": "rainbow",
+      "difficulty": "medium"
+    },
+    {
+      "word": "earthquake",
+      "difficulty": "medium"
+    },
+    {
+      "word": "waterfall",
+      "difficulty": "medium"
+    },
+    {
+      "word": "desert",
+      "difficulty": "medium"
+    },
+    {
+      "word": "jungle",
+      "difficulty": "medium"
+    },
+    {
+      "word": "glacier",
+      "difficulty": "medium"
+    },
+    {
+      "word": "cave",
+      "difficulty": "medium"
+    },
+    {
+      "word": "sunset",
+      "difficulty": "medium"
+    },
+    {
+      "word": "astronaut",
+      "difficulty": "medium"
+    },
+    {
+      "word": "pirate",
+      "difficulty": "medium"
+    },
+    {
+      "word": "wizard",
+      "difficulty": "medium"
+    },
+    {
+      "word": "witch",
+      "difficulty": "medium"
+    },
+    {
+      "word": "vampire",
+      "difficulty": "medium"
+    },
+    {
+      "word": "mermaid",
+      "difficulty": "medium"
+    },
+    {
+      "word": "knight",
+      "difficulty": "medium"
+    },
+    {
+      "word": "ninja",
+      "difficulty": "medium"
+    },
+    {
+      "word": "clown",
+      "difficulty": "medium"
+    },
+    {
+      "word": "chef",
+      "difficulty": "medium"
+    },
+    {
+      "word": "firefighter",
+      "difficulty": "medium",
+      "aliases": ["fireman"]
+    },
+    {
+      "word": "doctor",
+      "difficulty": "medium"
+    },
+    {
+      "word": "nurse",
+      "difficulty": "medium"
+    },
+    {
+      "word": "teacher",
+      "difficulty": "medium"
+    },
+    {
+      "word": "farmer",
+      "difficulty": "medium"
+    },
+    {
+      "word": "soccer",
+      "difficulty": "medium",
+      "aliases": ["football"]
+    },
+    {
+      "word": "basketball",
+      "difficulty": "medium"
+    },
+    {
+      "word": "tennis",
+      "difficulty": "medium"
+    },
+    {
+      "word": "golf",
+      "difficulty": "medium"
+    },
+    {
+      "word": "baseball",
+      "difficulty": "medium"
+    },
+    {
+      "word": "bowling",
+      "difficulty": "medium"
+    },
+    {
+      "word": "boxing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "surfing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "skiing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "fishing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "camping",
+      "difficulty": "medium"
+    },
+    {
+      "word": "chess",
+      "difficulty": "medium"
+    },
+    {
+      "word": "dinosaur",
+      "difficulty": "medium"
+    },
+    {
+      "word": "dragon",
+      "difficulty": "medium"
+    },
+    {
+      "word": "unicorn",
+      "difficulty": "medium"
+    },
+    {
+      "word": "werewolf",
+      "difficulty": "medium"
+    },
+    {
+      "word": "zombie",
+      "difficulty": "medium"
+    },
+    {
+      "word": "mummy",
+      "difficulty": "medium"
+    },
+    {
+      "word": "scarecrow",
+      "difficulty": "medium"
+    },
+    {
+      "word": "snowman",
+      "difficulty": "medium"
+    },
+    {
+      "word": "teddy bear",
+      "difficulty": "medium",
+      "aliases": ["teddy"]
+    },
+    {
+      "word": "pumpkin",
+      "difficulty": "medium"
+    },
+    {
+      "word": "violin",
+      "difficulty": "medium"
+    },
+    {
+      "word": "trumpet",
+      "difficulty": "medium"
+    },
+    {
+      "word": "saxophone",
+      "difficulty": "medium"
+    },
+    {
+      "word": "harp",
+      "difficulty": "medium"
+    },
+    {
+      "word": "xylophone",
+      "difficulty": "medium"
+    },
+    {
+      "word": "accordion",
+      "difficulty": "medium"
+    },
+    {
+      "word": "drum kit",
+      "difficulty": "medium",
+      "aliases": ["drums"]
+    },
+    {
+      "word": "hammock",
+      "difficulty": "medium"
+    },
+    {
+      "word": "swing",
+      "difficulty": "medium"
+    },
+    {
+      "word": "seesaw",
+      "difficulty": "medium",
+      "aliases": ["see saw"]
+    },
+    {
+      "word": "slide",
+      "difficulty": "medium"
+    },
+    {
+      "word": "sandcastle",
+      "difficulty": "medium",
+      "aliases": ["sand castle"]
+    },
+    {
+      "word": "fountain",
+      "difficulty": "medium"
+    },
+    {
+      "word": "bench",
+      "difficulty": "medium"
+    },
+    {
+      "word": "mailbox",
+      "difficulty": "medium",
+      "aliases": ["letterbox"]
+    },
+    {
+      "word": "traffic light",
+      "difficulty": "medium",
+      "aliases": ["stoplight"]
+    },
+    {
+      "word": "stop sign",
+      "difficulty": "medium"
+    },
+    {
+      "word": "photosynthesis",
+      "difficulty": "hard"
+    },
+    {
+      "word": "gravity",
+      "difficulty": "hard"
+    },
+    {
+      "word": "democracy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "nostalgia",
+      "difficulty": "hard"
+    },
+    {
+      "word": "jealousy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "procrastination",
+      "difficulty": "hard"
+    },
+    {
+      "word": "deja vu",
+      "difficulty": "hard",
+      "aliases": ["dejavu"]
+    },
+    {
+      "word": "sarcasm",
+      "difficulty": "hard"
+    },
+    {
+      "word": "karma",
+      "difficulty": "hard"
+    },
+    {
+      "word": "infinity",
+      "difficulty": "hard"
+    },
+    {
+      "word": "black hole",
+      "difficulty": "hard",
+      "aliases": ["blackhole"]
+    },
+    {
+      "word": "evolution",
+      "difficulty": "hard"
+    },
+    {
+      "word": "time travel",
+      "difficulty": "hard",
+      "aliases": ["time machine"]
+    },
+    {
+      "word": "metamorphosis",
+      "difficulty": "hard"
+    },
+    {
+      "word": "hibernation",
+      "difficulty": "hard"
+    },
+    {
+      "word": "echo",
+      "difficulty": "hard"
+    },
+    {
+      "word": "shadow",
+      "difficulty": "hard"
+    },
+    {
+      "word": "reflection",
+      "difficulty": "hard"
+    },
+    {
+      "word": "whisper",
+      "difficulty": "hard"
+    },
+    {
+      "word": "silence",
+      "difficulty": "hard"
+    },
+    {
+      "word": "bagpipes",
+      "difficulty": "hard"
+    },
+    {
+      "word": "didgeridoo",
+      "difficulty": "hard"
+    },
+    {
+      "word": "metronome",
+      "difficulty": "hard"
+    },
+    {
+      "word": "thermostat",
+      "difficulty": "hard"
+    },
+    {
+      "word": "periscope",
+      "difficulty": "hard"
+    },
+    {
+      "word": "stethoscope",
+      "difficulty": "hard"
+    },
+    {
+      "word": "seismograph",
+      "difficulty": "hard"
+    },
+    {
+      "word": "barometer",
+      "difficulty": "hard"
+    },
+    {
+      "word": "kaleidoscope",
+      "difficulty": "hard"
+    },
+    {
+      "word": "abacus",
+      "difficulty": "hard"
+    },
+    {
+      "word": "origami",
+      "difficulty": "hard"
+    },
+    {
+      "word": "calligraphy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "taxidermy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "archaeology",
+      "difficulty": "hard"
+    },
+    {
+      "word": "astronomy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "alchemy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "philosophy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "bureaucracy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "diplomacy",
+      "difficulty": "hard"
+    },
+    {
+      "word": "quarantine",
+      "difficulty": "hard"
+    },
+    {
+      "word": "labyrinth",
+      "difficulty": "hard",
+      "aliases": ["maze"]
+    },
+    {
+      "word": "avalanche",
+      "difficulty": "hard"
+    },
+    {
+      "word": "tsunami",
+      "difficulty": "hard"
+    },
+    {
+      "word": "blizzard",
+      "difficulty": "hard"
+    },
+    {
+      "word": "drought",
+      "difficulty": "hard"
+    },
+    {
+      "word": "eclipse",
+      "difficulty": "hard",
+      "aliases": ["solar eclipse"]
+    },
+    {
+      "word": "monsoon",
+      "difficulty": "hard"
+    },
+    {
+      "word": "aurora",
+      "difficulty": "hard",
+      "aliases": ["northern lights"]
+    },
+    {
+      "word": "geyser",
+      "difficulty": "hard"
+    },
+    {
+      "word": "quicksand",
+      "difficulty": "hard"
+    },
+    {
+      "word": "scuba diving",
+      "difficulty": "hard",
+      "aliases": ["scuba"]
+    },
+    {
+      "word": "bungee jumping",
+      "difficulty": "hard",
+      "aliases": ["bungee"]
+    },
+    {
+      "word": "parkour",
+      "difficulty": "hard"
+    },
+    {
+      "word": "fencing",
+      "difficulty": "hard"
+    },
+    {
+      "word": "curling",
+      "difficulty": "hard"
+    },
+    {
+      "word": "synchronized swimming",
+      "difficulty": "hard"
+    },
+    {
+      "word": "trampoline",
+      "difficulty": "hard"
+    },
+    {
+      "word": "juggling",
+      "difficulty": "hard"
+    },
+    {
+      "word": "tightrope",
+      "difficulty": "hard",
+      "aliases": ["tightrope walker"]
+    },
+    {
+      "word": "limbo",
+      "difficulty": "hard"
+    },
+    {
+      "word": "chameleon",
+      "difficulty": "hard"
+    },
+    {
+      "word": "platypus",
+      "difficulty": "hard"
+    },
+    {
+      "word": "narwhal",
+      "difficulty": "hard"
+    },
+    {
+      "word": "axolotl",
+      "difficulty": "hard"
+    },
+    {
+      "word": "pangolin",
+      "difficulty": "hard"
+    },
+    {
+      "word": "armadillo",
+      "difficulty": "hard"
+    },
+    {
+      "word": "anteater",
+      "difficulty": "hard"
+    },
+    {
+      "word": "tardigrade",
+      "difficulty": "hard"
+    },
+    {
+      "word": "mantis shrimp",
+      "difficulty": "hard"
+    },
+    {
+      "word": "okapi",
+      "difficulty": "hard"
+    },
+    {
+      "word": "cryptocurrency",
+      "difficulty": "hard",
+      "aliases": ["crypto"]
+    },
+    {
+      "word": "blockchain",
+      "difficulty": "hard",
+      "aliases": ["block chain"]
+    },
+    {
+      "word": "artificial intelligence",
+      "difficulty": "hard",
+      "aliases": ["ai"]
+    },
+    {
+      "word": "quantum computer",
+      "difficulty": "hard",
+      "aliases": ["quantum computing"]
+    },
+    {
+      "word": "wifi",
+      "difficulty": "hard",
+      "aliases": ["wi-fi"]
+    },
+    {
+      "word": "password",
+      "difficulty": "hard"
+    },
+    {
+      "word": "spreadsheet",
+      "difficulty": "hard"
+    },
+    {
+      "word": "podcast",
+      "difficulty": "hard"
+    },
+    {
+      "word": "firewall",
+      "difficulty": "hard"
+    },
+    {
+      "word": "algorithm",
+      "difficulty": "hard"
+    },
+    {
+      "word": "wedding",
+      "difficulty": "hard"
+    },
+    {
+      "word": "funeral",
+      "difficulty": "hard"
+    },
+    {
+      "word": "graduation",
+      "difficulty": "hard"
+    },
+    {
+      "word": "birthday party",
+      "difficulty": "hard",
+      "aliases": ["birthday"]
+    },
+    {
+      "word": "job interview",
+      "difficulty": "hard",
+      "aliases": ["interview"]
+    },
+    {
+      "word": "traffic jam",
+      "difficulty": "hard",
+      "aliases": ["traffic"]
+    },
+    {
+      "word": "road trip",
+      "difficulty": "hard",
+      "aliases": ["roadtrip"]
+    },
+    {
+      "word": "sleepwalking",
+      "difficulty": "hard"
+    },
+    {
+      "word": "daydream",
+      "difficulty": "hard"
+    },
+    {
+      "word": "insomnia",
+      "difficulty": "hard"
+    },
+    {
+      "word": "mime",
+      "difficulty": "hard"
+    },
+    {
+      "word": "cartographer",
+      "difficulty": "hard"
+    },
+    {
+      "word": "lighthouse keeper",
+      "difficulty": "hard"
+    },
+    {
+      "word": "beekeeper",
+      "difficulty": "hard",
+      "aliases": ["beekeeping"]
+    },
+    {
+      "word": "blacksmith",
+      "difficulty": "hard"
+    },
+    {
+      "word": "locksmith",
+      "difficulty": "hard"
+    },
+    {
+      "word": "ventriloquist",
+      "difficulty": "hard"
+    },
+    {
+      "word": "conductor",
+      "difficulty": "hard"
+    },
+    {
+      "word": "matador",
+      "difficulty": "hard"
+    },
+    {
+      "word": "hypnotist",
+      "difficulty": "hard"
+    }
+  ]
+}
