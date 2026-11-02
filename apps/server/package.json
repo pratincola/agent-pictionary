@@ -1,0 +1,33 @@
+{
+  "name": "@pictionary/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fastify + ws arena server. REST, WebSocket, room actors, Postgres persistence.",
+  "main": "./dist/main.js",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b --noEmit",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "start": "node dist/main.js",
+    "dev": "node --watch --experimental-strip-types src/main.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node dist/db/migrate.js"
+  },
+  "dependencies": {
+    "@pictionary/engine": "workspace:*",
+    "@pictionary/protocol": "workspace:*",
+    "drizzle-orm": "0.45.4",
+    "fastify": "5.12.7",
+    "pino": "10.4.0",
+    "postgres": "3.4.9",
+    "ws": "8.22.1"
+  },
+  "devDependencies": {
+    "@types/ws": "8.18.2",
+    "drizzle-kit": "0.31.11",
+    "fast-check": "4.10.2",
+    "vitest": "5.0.5"
+  }
+}
