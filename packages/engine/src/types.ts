@@ -117,6 +117,13 @@ export type PersistRecord =
       scores: import("@pictionary/protocol").ScoreTable;
     }
   | {
+      /** A guess that arrived after the round ended (late/round_over); appended to the round's log. */
+      type: "guess.append";
+      matchId: string;
+      roundIndex: number;
+      guess: GuessRecord;
+    }
+  | {
       type: "match.ended";
       matchId: string;
       endedAt: number;

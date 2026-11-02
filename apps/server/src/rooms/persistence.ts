@@ -208,6 +208,38 @@ export class Persistence {
           }
         });
         return;
+      case "guess.append": {
+        const found = await this.db
+          .select({ id: schema.rounds.id })
+          .from(schema.rounds)
+          .where(
+            and(
+              eq(schema.rounds.matchId, record.matchId),
+              eq(schema.rounds.index, record.roundIndex),
+            ),
+          )
+          .limit(1);
+        const roundId = found[0]?.id;
+        if (!roundId)
+          throw new Error(`round ${record.matchId}#${record.roundIndex} not persisted yet`);
+        const g = record.guess;
+        await this.db
+          .insert(schema.guesses)
+          .values({
+            roundId,
+            seq: g.seq,
+            agentId: g.agentId,
+            humanId: g.humanId ?? null,
+            source: g.source,
+            text: g.text,
+            normalized: g.normalized,
+            result: g.result,
+            recvNs: g.recvNs ? BigInt(g.recvNs) : null,
+            clientTs: g.clientTs,
+          })
+          .onConflictDoNothing();
+        return;
+      }
       case "match.ended":
         await this.db.transaction(async (tx) => {
           const updated = await tx

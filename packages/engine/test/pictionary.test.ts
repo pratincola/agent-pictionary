@@ -259,8 +259,13 @@ describe("guess rules", () => {
     expect(persisted?.type === "round.ended" && persisted.guesses.map((g) => g.result)).toEqual([
       "correct",
     ]);
-    // Late guesses are kept in state for the audit log even though persistence already ran.
+    // Late guesses are kept in state and appended to the persisted log one by one.
     expect(sim.round?.guesses.map((g) => g.result)).toEqual(["correct", "late", "round_over"]);
+    const appended = sim.persisted.filter((p) => p.type === "guess.append");
+    expect(appended.map((p) => p.type === "guess.append" && p.guess.result)).toEqual([
+      "late",
+      "round_over",
+    ]);
   });
 
   it("firstCorrectEnds=false lets later solvers score until exhausted", () => {

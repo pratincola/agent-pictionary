@@ -46,8 +46,9 @@ export const PictionaryConfig = z.object({
   guessesPerAgent: z.number().int().min(1).max(10).default(3),
   humanGuessesPerRound: z.number().int().min(0).max(10).default(3),
   firstCorrectEnds: z.boolean().default(true),
-  minPlayers: z.number().int().min(2).max(8).default(2),
-  maxPlayers: z.number().int().min(2).max(8).default(8),
+  minPlayers: z.number().int().min(2).max(64).default(2),
+  /** PLAN.md §10 says 2-8 for play; the ceiling is 64 so load/race tests can fill a room. */
+  maxPlayers: z.number().int().min(2).max(64).default(8),
   /** Drawer disconnected for longer than this during `drawing` -> round skipped. */
   drawerGraceMs: z.number().int().min(0).default(10_000),
 });

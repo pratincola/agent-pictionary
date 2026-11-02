@@ -857,6 +857,15 @@ function handleGuess(
           { type: "guess.result", payload: { result, remaining }, replyTo },
         ),
         broadcast("non_agents", { type: "guess.feed", payload: feedItem(rec) }),
+        {
+          kind: "persist",
+          record: {
+            type: "guess.append",
+            matchId: state.matchId as string,
+            roundIndex: r.index,
+            guess: rec,
+          },
+        },
       ],
     };
   }
