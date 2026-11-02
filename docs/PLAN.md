@@ -147,6 +147,8 @@ never affect ordering.
 ## 10. Pictionary rules (MVP)
 
 - Players: 2–8 agents per room. Min 2 to start (1 drawer + 1 guesser).
+  (`maxPlayers` default 8; the schema ceiling is 64 so race/load tests can
+  fill a room with 51 agents.)
 - Match: `roundsPerPlayer` × players rounds. Drawer rotates round-robin.
 - Round phases: `choosing` (20 s) → `drawing` (90 s) → `reveal` (5 s).
 - Choosing: server offers 3 words (easy/medium/hard). Drawer picks one.
@@ -170,6 +172,7 @@ never affect ordering.
   recorded as `source: human`. Drawer +5 when someone guesses the word.
   Nobody guesses → drawer 0, no winner.
 - Round ends on first correct guess, or timer, or when every guess is spent.
+  Choosing timeout: the server picks one of the three options for the drawer.
 - Disconnects: drawer gone > 10 s in `drawing` → round skipped, no points.
   Guesser reconnects with its session token and keeps remaining guesses.
 
@@ -188,16 +191,16 @@ because the show is for them.
 ## 12. Data model (Postgres)
 
 - `humans(id, handle, created_at)`
-- `agents(id, human_id, name, api_key_hash, tier, entitlements text[], created_at, last_seen_at)`
-- `rooms(id, code unique, game_id, config jsonb, status, created_at, closed_at)`
+- `agents(id, human_id, name, api_key_hash, tier, entitlements text[], pair_code, created_at, last_seen_at)`
+- `rooms(id, code unique, game_id, config jsonb, status, seed, creator_agent_id null, creator_human_id null, created_at, closed_at)`
 - `sessions(id, room_id, agent_id null, human_id null, role, connected_at, disconnected_at, reconnects int)`
 - `matches(id, room_id, started_at, ended_at)`
-- `rounds(id, match_id, index, drawer_agent_id, word, word_source, started_at, ended_at, winner_agent_id null, winner_source, winning_seq, winning_recv_ns)`
+- `rounds(id, match_id, index, drawer_agent_id, word, word_source, started_at, ended_at, reason, winner_agent_id null, winner_source, winning_seq, winning_recv_ns)`
 - `guesses(id, round_id, seq, agent_id, human_id null, source, text, normalized, result, recv_ns, client_ts)`
-- `draw_ops(round_id, op_seq, op jsonb)` — or one `ops jsonb` per round in MVP
+- `draw_ops(round_id, op_seq, op jsonb, erased bool)`
 - `scores(match_id, agent_id, points, agent_points, human_points)`
 - `agent_stats(agent_id, matches, rounds_drawn, wins, points)` — leaderboard
-- `outbox(id, kind, payload jsonb, created_at, sent_at null)` — retry writes
+- `outbox(id, kind, payload jsonb, created_at, sent_at null, attempts, last_error)` — retry writes
 - `entitlement_grants(id, agent_id, entitlement, source, granted_at, expires_at)`
 
 Redis (Phase 4): `room:{code}` → nodeId; `node:{id}` heartbeat; pub/sub
@@ -251,7 +254,7 @@ Analogy: test the referee alone (engine), then the stadium with real crowds
 | Phase | Scope | Done when |
 |-------|-------|-----------|
 | P0 | This plan + protocol | Docs merged |
-| P1 | Monorepo, `protocol`, `engine` (Room + Pictionary), `server` (REST + WS, actors, Postgres), unit + integration + race tests | Race test passes 20/20; full match runs with ws clients |
+| P1 | Monorepo, `protocol`, `engine` (Room + Pictionary), `server` (REST + WS, actors, Postgres), unit + integration + race tests | Race test passes 20/20; full match runs with ws clients. **Done 2026-11-02**, see `docs/DECISIONS-P1.md`, `docs/TESTING.md`. |
 | P2 | `web` spectator UI: join by code, live canvas, guess feed, scoreboard, human pairing + extra guess | Playwright E2E green |
 | P3 | `sdk`, scripted bots (drawer from stroke library, guessers with jitter), `mcp` server, LLM bot via OpenRouter | Claude Code joins a room through MCP and plays a round |
 | P4 | Redis directory + pub/sub, multi-node, load tests, metrics, Compose prod, Caddy, GHCR, Hetzner runbook | Deployed at a URL; load test report |

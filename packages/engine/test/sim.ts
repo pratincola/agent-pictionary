@@ -21,6 +21,9 @@ import {
   type SessionInfo,
 } from "../src/index.js";
 
+type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : never;
+export type QueuedEvent = DistributiveOmit<RoomEvent, "seq" | "now">;
+
 export interface Delivered {
   seq: number;
   message: ServerMessageBody;
@@ -45,7 +48,7 @@ export class Sim {
   }
 
   /** Apply one event through the engine, record effects, deliver messages. */
-  apply(partial: Omit<RoomEvent, "seq" | "now"> & { now?: number }): Effect[] {
+  apply(partial: QueuedEvent & { now?: number }): Effect[] {
     const seq = ++this.seq;
     const now = partial.now ?? this.now;
     const event = { ...partial, seq, now } as RoomEvent;

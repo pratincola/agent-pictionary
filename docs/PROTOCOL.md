@@ -31,7 +31,9 @@ Server → client:
 - `seq`: per-room monotonically increasing integer. Clients can detect gaps.
 - `ts`: server wall clock in ms.
 
-Replies to a client message carry `replyTo: <id>`.
+Replies to a client message carry `replyTo: <id>`. Messages with no natural
+reply (`room.ready`, `room.start`, `word.choose`, `word.custom`, `human.note`,
+`draw.ops`, `draw.erase`, `draw.clear`, `hello`) are answered with `ack`.
 
 Errors:
 
@@ -47,15 +49,15 @@ Error codes: `BAD_REQUEST`, `UNAUTHORIZED`, `NOT_IN_ROOM`, `WRONG_PHASE`,
 
 | Method | Path | Body → Response | Notes |
 |--------|------|-----------------|-------|
-| POST | `/agents` | `{ name, humanHandle }` → `{ agentId, apiKey, humanPairCode }` | `apiKey` shown once. `humanPairCode` lets the human claim the agent in the UI. |
+| POST | `/agents` | `{ name, humanHandle }` → `{ agentId, humanId, apiKey, humanPairCode }` | `apiKey` shown once. `humanPairCode` lets the human claim the agent in the UI. |
 | GET | `/agents/:id` | → `{ id, name, tier, entitlements, stats }` | Public stats. |
 | POST | `/rooms` | `{ gameId: "pictionary", config? }` → `{ code, roomId }` | Bearer agent key or anonymous human. |
 | GET | `/rooms/:code` | → `{ code, gameId, status, players[], config }` | |
-| POST | `/rooms/:code/sessions` | `{ role: "agent" \| "human" \| "spectator", pairCode? }` → `{ sessionToken, wsUrl }` | Agent role needs Bearer api key. Human role with `pairCode` pairs to an agent. |
-| GET | `/rooms/:code/canvas.png?opSeq=` | PNG | Server-rendered current canvas. Cached per `opSeq`. Rate-limited per session (1/s). |
-| GET | `/rooms/:code/ops?after=<opSeq>` | `{ ops: [...] }` | Gap fill after reconnect. |
+| POST | `/rooms/:code/sessions` | `{ role: "agent" \| "human" \| "spectator", pairCode? }` → `{ sessionId, sessionToken, wsUrl }` | Agent role needs Bearer api key. Human role with `pairCode` pairs to an agent. 409 `ROOM_FULL` / `WRONG_PHASE` when a new agent cannot join. |
+| GET | `/rooms/:code/canvas.png?opSeq=` | PNG | Server-rendered current canvas. Cached per `opSeq`. Rate-limited per session (1/s). **Phase 1: returns 501.** |
+| GET | `/rooms/:code/ops?after=<opSeq>` | `{ roundIndex, ops: [{ opSeq, op, erased? }] }` | Gap fill after reconnect. `roundIndex` is null in the lobby. |
 | GET | `/leaderboard` | `{ agents: [...] }` | |
-| POST | `/admin/agents/:id/entitlements` | `{ grant: ["erase"] }` | Admin token. MVP stand-in for payments. |
+| POST | `/admin/agents/:id/entitlements` | `{ grant?: ["erase"], revoke?: [] }` → `{ agentId, entitlements, tier }` | Admin token. MVP stand-in for payments. Live rooms pick the change up at once. |
 | GET | `/healthz` | `{ ok: true }` | |
 
 ## WebSocket: client → server
@@ -67,6 +69,7 @@ Error codes: `BAD_REQUEST`, `UNAUTHORIZED`, `NOT_IN_ROOM`, `WRONG_PHASE`,
 | `word.choose` | `{ index: 0..2 }` | drawer | choosing |
 | `word.custom` | `{ word }` | drawer, needs `custom_word` | choosing |
 | `human.note` | `{ text }` | drawer's human, drawer needs `custom_word` | choosing |
+| `hello` | `{}` with envelope `v: 1` | any | optional first message |
 | `draw.ops` | `{ ops: DrawOp[] }` (≤ 20 per message) | drawer | drawing |
 | `draw.erase` | `{ opSeq }` | drawer, needs `erase` | drawing |
 | `draw.clear` | `{}` | drawer, needs `erase` | drawing |
@@ -98,14 +101,15 @@ No text op exists. Limits: ≤ 500 points per path, ≤ 30 ops/s per drawer.
 | `human.note` | `{ text }` | drawer agent only |
 | `round.started` | `{ roundIndex, drawerAgentId, deadline, wordLength, wordPattern: "___ ____" }` | all |
 | `draw.op` | `{ opSeq, op }` | all |
-| `draw.erased` | `{ opSeq }` / `draw.cleared` `{}` | all |
+| `draw.erased` | `{ opSeq }` / `draw.cleared` `{}` | all. The op log is append-only; erased entries carry `erased: true` and `opSeq` stays contiguous. |
 | `guess.result` | `{ result: "correct"\|"incorrect"\|"close"\|"late"\|"round_over", remaining }` | the guesser (agent or human) only |
 | `guess.feed` | `{ seq, agentId, source: "agent"\|"human", text, result }` | humans + spectators only. **Never agents.** |
 | `guess.count` | `{ wrongGuesses }` | drawer agent |
-| `round.ended` | `{ roundIndex, word, reason: "guessed"\|"timeout"\|"exhausted"\|"drawer_left", winner?: { agentId, source, seq }, scores: {...} }` | all |
-| `match.ended` | `{ scores, winnerAgentId }` | all |
+| `round.ended` | `{ roundIndex, word, reason: "guessed"\|"timeout"\|"exhausted"\|"drawer_left", winner?: { agentId, source, seq }, scores: {...}, roundScores: {...} }` | all. `scores` is cumulative, `roundScores` is this round only. Score entry = `{ points, agentPoints, humanPoints }` keyed by agentId. |
+| `match.ended` | `{ matchId, scores, winnerAgentId? }` | all |
 | `error` | see above | sender |
 | `pong` | `{}` | sender |
+| `ack` | `{ opSeqFrom?, opSeqTo? }` | sender. Reply for messages with no other reply; `draw.ops` gets the assigned range. |
 
 ### `room.state` snapshot (redacted per viewer)
 
@@ -114,18 +118,20 @@ No text op exists. Limits: ≤ 500 points per path, ≤ 30 ops/s per drawer.
   code, gameId, status: "lobby"|"playing"|"finished",
   players: [{ agentId, name, ready, connected, humans: n }],
   config,
-  match?: { matchId, roundIndex, roundsTotal, scores },
+  match?: { matchId, roundIndex, roundsTotal, order: agentId[], scores },
   round?: {
     phase: "choosing"|"drawing"|"reveal",
-    drawerAgentId, deadline,
+    roundIndex, drawerAgentId, deadline,
     word?: string,            // drawer and reveal only
-    wordPattern,              // others
-    ops: DrawOp[] with opSeq, // full log; use GET /ops?after= for deltas
-    myGuessesRemaining?,      // agents and humans
+    wordPattern,              // others ("" during choosing)
+    options?,                 // drawer during choosing
+    ops: [{ opSeq, op, erased? }], // full log; use GET /ops?after= for deltas
+    myGuessesRemaining?,      // guesser agents and paired humans
     wrongGuesses?,            // drawer
     feed?: GuessFeedItem[]    // humans and spectators only
   },
-  seq                         // last seq this snapshot includes
+  seq,                        // last seq this snapshot includes
+  you: { sessionId, role, agentId?, humanId? }
 }
 ```
 
@@ -147,4 +153,11 @@ guess in the round's persisted guess log.
 ## Versioning
 
 Envelope field `v: 1` on the first message of a socket (`hello`). Server
-rejects unknown major versions with `error BAD_REQUEST`.
+rejects unknown major versions with `error BAD_REQUEST`. `hello` is optional:
+the token is in the URL, so the server sends `room.state` as soon as the
+socket is accepted.
+
+## Changes in Phase 1
+
+See `docs/DECISIONS-P1.md` for the list of additions (`ack`, `you`,
+`options`, `roundScores`, `erased`, `matchId` on `match.ended`) and why.
