@@ -5,6 +5,13 @@
   "type": "module",
   "description": "Fastify + ws arena server. REST, WebSocket, room actors, Postgres persistence.",
   "main": "./dist/main.js",
+  "exports": {
+    ".": {
+      "source": "./src/app.ts",
+      "types": "./dist/app.d.ts",
+      "import": "./dist/app.js"
+    }
+  },
   "scripts": {
     "build": "tsc -b",
     "typecheck": "tsc -b && tsc -p tsconfig.test.json",
