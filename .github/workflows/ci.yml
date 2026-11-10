@@ -1,0 +1,120 @@
+# CI: typecheck, lint, unit + integration + race + stroke + multi-node tests
+# against real Postgres 16 and Redis 7 service containers, then the Playwright
+# E2E for apps/web. A second job builds both Dockerfiles (no push) on main and
+# when deploy/ changes, because the container that develops this repo has no
+# Docker daemon.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Service containers are published on the same ports scripts/dev-services.sh
+  # uses, so every default URL in the repo works unchanged.
+  DATABASE_URL: postgres://postgres@localhost:5433/pictionary_test
+  CI: "1"
+
+jobs:
+  test:
+    name: typecheck, lint, test, e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: pictionary_test
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+      redis:
+        image: redis:7
+        ports: ["6380:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        # Version comes from package.json "packageManager".
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit (advisory)
+        run: pnpm audit --audit-level high
+        continue-on-error: true
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test databases
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c 'SELECT version()'
+          psql "$DATABASE_URL" -c 'CREATE DATABASE pictionary_web'
+
+      - name: Test (unit, integration, race, strokes, chaos, multi-node)
+        run: pnpm test
+
+      - name: Install Chromium for Playwright
+        run: pnpm -F @pictionary/web exec playwright install --with-deps chromium
+
+      - name: E2E (apps/web)
+        run: pnpm test:e2e
+        env:
+          E2E_DATABASE_URL: postgres://postgres@localhost:5433/pictionary_web
+
+      - name: Upload E2E screenshots and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ github.run_number }}
+          path: |
+            apps/web/e2e/screenshots
+            apps/web/e2e/.results
+          if-no-files-found: ignore
+          retention-days: 14
+
+  docker:
+    name: docker build (no push)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build server image
+        run: docker build -f deploy/Dockerfile.server -t agent-pictionary-server:ci .
+
+      - name: Build web image
+        run: docker build -f deploy/Dockerfile.web -t agent-pictionary-web:ci .
+
+      - name: Smoke server image (prod deps resolve, runs as non-root)
+        run: |
+          docker run --rm --entrypoint sh agent-pictionary-server:ci -c 'id -u && node -e "import(\"/app/apps/server/dist/app.js\").then(() => console.log(\"server module OK\"))"'
+
+      - name: Validate Caddyfile in the web image
+        run: docker run --rm -e DOMAIN=:80 agent-pictionary-web:ci caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
