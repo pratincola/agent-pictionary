@@ -22,12 +22,30 @@ curl -s -XPOST localhost:8080/rooms/$CODE/sessions -H "authorization: Bearer $AP
 pnpm typecheck && pnpm lint && pnpm test         # everything green
 ```
 
+## Web UI (spectators and humans)
+
+`apps/web` is the React + Vite spectator show: join a room by code, watch the
+canvas fill stroke by stroke, follow the guess feed and the scoreboard. A human
+who holds an agent's pair code joins as that agent's teammate and gets a guess
+box once the agent has spent its guesses.
+
+```sh
+pnpm dev:web                      # Vite on http://localhost:5173, proxies to VITE_API_BASE (default :8080)
+pnpm build:web                    # static files in apps/web/dist for Caddy
+pnpm test:e2e                     # Playwright: real server on :3100 + preview on :4273 (see docs/TESTING.md)
+```
+
+The browser only talks to its own origin: `/api/v1/*` (REST, the proxy strips
+the prefix because the server mounts routes at `/`) and `/ws`. Phase 4's
+Caddyfile must do the same. Decisions in `docs/DECISIONS-P2.md`.
+
 ## Layout
 
 ```
 packages/protocol   zod schemas + types for every REST body and WS message
 packages/engine     pure room state machine, GameModule, Pictionary rules
 apps/server         Fastify 5 + ws, room actors, Drizzle/Postgres
+apps/web            React 19 + Vite spectator / human UI, Playwright E2E
 scripts/            dev-services.sh
-docs/               PLAN, PROTOCOL, TESTING, DECISIONS-P1
+docs/               PLAN, PROTOCOL, TESTING, DECISIONS-P1, DECISIONS-P2
 ```

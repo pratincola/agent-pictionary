@@ -5,5 +5,10 @@ dist/
 .env.*
 !.env.example
 coverage/
+apps/web/e2e/.results/
+apps/web/e2e/screenshots/*
+!apps/web/e2e/screenshots/drawing.png
+!apps/web/e2e/screenshots/human.png
+!apps/web/e2e/screenshots/reveal.png
 *.log
 .DS_Store
