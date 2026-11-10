@@ -68,7 +68,7 @@ export function parseGuess(
     .map((l) => l.trim())
     .find((l) => l.length > 0);
   if (!first) return undefined;
-  let g = first.replace(/^(answer|guess)\s*[:\-]\s*/i, "");
+  let g = first.replace(/^(answer|guess)\s*[:-]\s*/i, "");
   g = g.replace(/^["'`*_\s]+|["'`*_\s.!?]+$/g, "");
   const norm = normalizeGuess(g);
   if (!norm) return undefined;
@@ -117,9 +117,7 @@ export async function chatWithImage(
     };
     const content = json.choices?.[0]?.message?.content;
     const text =
-      typeof content === "string"
-        ? content
-        : (content ?? []).map((c) => c.text ?? "").join("\n");
+      typeof content === "string" ? content : (content ?? []).map((c) => c.text ?? "").join("\n");
     return { text };
   } finally {
     clearTimeout(t);
@@ -157,7 +155,11 @@ export class LlmGuesser implements GuesserStrategy {
       const image = renderDataUrl(ops, { size: this.opts.imageSize ?? 512 });
       let text: string;
       try {
-        ({ text } = await chatWithImage(chat, buildPrompt(ctx.pattern, ctx.tried, lastResult), image));
+        ({ text } = await chatWithImage(
+          chat,
+          buildPrompt(ctx.pattern, ctx.tried, lastResult),
+          image,
+        ));
       } catch (err) {
         ctx.log(`llm call failed: ${String(err)}`);
         continue;

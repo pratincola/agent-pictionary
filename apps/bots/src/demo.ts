@@ -50,7 +50,7 @@ export function spectatorUrlFor(template: string, code: string): string {
 export async function runDemo(opts: DemoOptions): Promise<DemoResult> {
   const out = opts.log ?? ((l: string) => console.log(l));
   const shared: { word?: string } = {};
-  const drawer = (name: string) =>
+  const drawer = (_name: string) =>
     new LibraryDrawer({
       durationMs: (opts.drawDurationSec ?? 30) * 1000,
       onWord: (w) => {
@@ -74,7 +74,9 @@ export async function runDemo(opts: DemoOptions): Promise<DemoResult> {
   ];
 
   const regs = await Promise.all(
-    roster.map((r) => registerAgent(opts.baseUrl, { name: r.name, humanHandle: `${r.name}-human` })),
+    roster.map((r) =>
+      registerAgent(opts.baseUrl, { name: r.name, humanHandle: `${r.name}-human` }),
+    ),
   );
   const creator = regs[0];
   if (!creator) throw new Error("no agents");

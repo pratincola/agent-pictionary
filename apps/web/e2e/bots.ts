@@ -15,8 +15,8 @@ import {
   WsClient,
 } from "../../server/test/helpers.js";
 
-export { createRoom, createSession, registerAgent, setupRoom, sleep, startAndChoose, WsClient };
 export type { Player };
+export { createRoom, createSession, registerAgent, setupRoom, sleep, startAndChoose, WsClient };
 
 const INK = "#1b1b1f";
 
@@ -69,7 +69,10 @@ export function extraLines(n: number): DrawOp[] {
     ops.push({
       kind: "line",
       from: [Math.round(500 + 310 * Math.cos(t)), Math.round(520 + 310 * Math.sin(t))],
-      to: [Math.round(500 + 380 * Math.cos(t)), Math.min(1000, Math.round(520 + 380 * Math.sin(t)))],
+      to: [
+        Math.round(500 + 380 * Math.cos(t)),
+        Math.min(1000, Math.round(520 + 380 * Math.sin(t))),
+      ],
       width: 2,
       color: "#2f855a",
     });

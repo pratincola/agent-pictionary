@@ -113,7 +113,9 @@ test.describe("spectator and human during a bot match", () => {
     await spectator.screenshot({ path: `${SHOTS}/drawing.png` });
 
     // --- Reconnect: drop the socket, miss 20 ops, resync from the snapshot ---
-    await spectator.evaluate(() => (window as Window & { __apDropSocket?: () => void }).__apDropSocket?.());
+    await spectator.evaluate(() =>
+      (window as Window & { __apDropSocket?: () => void }).__apDropSocket?.(),
+    );
     await expect(spectator.getByTestId("conn")).toHaveAttribute("data-status", "reconnecting");
     await drawAll(drawer, extraLines(20));
     await expect(spectator.getByTestId("conn")).toHaveAttribute("data-status", "open");
@@ -124,7 +126,9 @@ test.describe("spectator and human during a bot match", () => {
     // --- Two guessers miss 3 times each -> 6 incorrect feed items -----------
     await missAll(guessers, 3);
     await expect(spectator.getByTestId("feed-item")).toHaveCount(6);
-    await expect(spectator.locator("[data-testid=feed-item][data-result=incorrect]")).toHaveCount(6);
+    await expect(spectator.locator("[data-testid=feed-item][data-result=incorrect]")).toHaveCount(
+      6,
+    );
     await expect(spectator.locator("[data-testid=feed-item][data-source=agent]")).toHaveCount(6);
     await expect(spectator.getByTestId("feed-count")).toHaveText("6");
 
@@ -160,7 +164,9 @@ test.describe("spectator and human during a bot match", () => {
     await expect(spectator.getByTestId("word")).toHaveText(word);
     // Scores: drawer +5, the human's team +5 (human assist).
     const drawerRow = spectator.locator(`[data-testid=player-row][data-agent="${drawer.agentId}"]`);
-    const teamRow = spectator.locator(`[data-testid=player-row][data-agent="${nextDrawer.agentId}"]`);
+    const teamRow = spectator.locator(
+      `[data-testid=player-row][data-agent="${nextDrawer.agentId}"]`,
+    );
     await expect(drawerRow.getByTestId("points")).toContainText("5");
     await expect(teamRow.getByTestId("points")).toContainText("5");
     await expect(teamRow.locator(".delta")).toHaveText("+5");

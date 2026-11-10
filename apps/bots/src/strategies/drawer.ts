@@ -51,8 +51,7 @@ export class LibraryDrawer implements DrawerStrategy {
 
   choose(options: WordOption[]): 0 | 1 | 2 {
     const pick =
-      this.opts.index ??
-      ((options.find((o) => this.library.has(o.word))?.index ?? 0) as 0 | 1 | 2);
+      this.opts.index ?? ((options.find((o) => this.library.has(o.word))?.index ?? 0) as 0 | 1 | 2);
     const word = options.find((o) => o.index === pick)?.word;
     if (word) this.opts.onWord?.(word);
     return pick;

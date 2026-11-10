@@ -91,7 +91,9 @@ export class Bot {
       }
       this.rounds.push(s);
       const me = p.winner?.agentId === c.agentId ? " (me!)" : "";
-      this.log(`round ${p.roundIndex} ended: "${p.word}" ${p.reason}${p.winner ? ` winner=${p.winner.agentId}${me} seq=${p.winner.seq}` : ""}`);
+      this.log(
+        `round ${p.roundIndex} ended: "${p.word}" ${p.reason}${p.winner ? ` winner=${p.winner.agentId}${me} seq=${p.winner.seq}` : ""}`,
+      );
     });
     c.on("match.ended", (m) => {
       this.abortRound();
@@ -117,7 +119,7 @@ export class Bot {
   private onChoosing(): void {
     const c = this.client;
     const r = c.state?.round;
-    if (!r || r.phase !== "choosing" || !c.isDrawer() || !r.options) return;
+    if (r?.phase !== "choosing" || !c.isDrawer() || !r.options) return;
     if (this.chosenFor === r.roundIndex) return;
     this.chosenFor = r.roundIndex;
     const index = this.opts.drawer.choose(r.options);

@@ -9,11 +9,14 @@ import { animateOps } from "../src/strategies/drawer.js";
 
 describe("stroke library", () => {
   it("every programmatic drawing produces valid ops for a real pool word", () => {
-    const pool = new Set(WORD_POOL.flatMap((w) => [w.word, ...(w.aliases ?? [])].map(normalizeGuess)));
+    const pool = new Set(
+      WORD_POOL.flatMap((w) => [w.word, ...(w.aliases ?? [])].map(normalizeGuess)),
+    );
     for (const [word, make] of Object.entries(DRAWINGS)) {
       const ops = make();
       expect(ops.length, word).toBeGreaterThan(0);
-      for (const op of ops) expect(() => DrawOp.parse(op), `${word}: ${JSON.stringify(op)}`).not.toThrow();
+      for (const op of ops)
+        expect(() => DrawOp.parse(op), `${word}: ${JSON.stringify(op)}`).not.toThrow();
       expect(pool.has(normalizeGuess(word)), `${word} is not in the pool`).toBe(true);
     }
     expect(Object.keys(DRAWINGS).length).toBeGreaterThanOrEqual(40);
@@ -24,7 +27,10 @@ describe("stroke library", () => {
     const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
     expect(files.length).toBe(Object.keys(DRAWINGS).length);
     for (const f of files) {
-      const json = JSON.parse(readFileSync(join(dir, f), "utf8")) as { word: string; ops: unknown[] };
+      const json = JSON.parse(readFileSync(join(dir, f), "utf8")) as {
+        word: string;
+        ops: unknown[];
+      };
       const expected = DRAWINGS[json.word];
       expect(expected, `${f}: unknown word ${json.word}`).toBeDefined();
       expect(json.ops).toEqual(expected?.());

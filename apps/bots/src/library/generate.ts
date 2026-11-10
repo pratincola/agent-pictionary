@@ -29,5 +29,7 @@ if (process.argv[1]?.endsWith("generate.js") || process.argv[1]?.endsWith("gener
   const pngIdx = process.argv.indexOf("--png");
   const pngDir = pngIdx > 0 ? process.argv[pngIdx + 1] : undefined;
   const files = generateLibrary(undefined, pngDir);
-  console.log(`wrote ${files.length} drawings to ${libraryDir()}${pngDir ? ` and PNGs to ${pngDir}` : ""}`);
+  console.log(
+    `wrote ${files.length} drawings to ${libraryDir()}${pngDir ? ` and PNGs to ${pngDir}` : ""}`,
+  );
 }

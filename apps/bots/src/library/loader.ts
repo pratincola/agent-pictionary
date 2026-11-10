@@ -68,6 +68,15 @@ export function placeholderDrawing(): DrawOp[] {
       color: "#1f2430",
     },
     { kind: "line", from: [500, 570], to: [500, 680], width: 12, color: "#1f2430" },
-    { kind: "ellipse", cx: 500, cy: 760, rx: 16, ry: 16, width: 4, color: "#1f2430", fill: "#1f2430" },
+    {
+      kind: "ellipse",
+      cx: 500,
+      cy: 760,
+      rx: 16,
+      ry: 16,
+      width: 4,
+      color: "#1f2430",
+      fill: "#1f2430",
+    },
   ];
 }

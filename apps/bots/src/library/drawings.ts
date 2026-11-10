@@ -13,10 +13,9 @@ import {
   path,
   polygon,
   rect,
-  star,
   type Style,
+  star,
   wave,
-  zigzag,
 } from "./shapes.js";
 
 const THICK: Style = { width: 8 };
@@ -199,13 +198,11 @@ export const DRAWINGS: Record<string, Drawing> = {
       [230, 470],
     ]),
     circle(280, 410, 10, { fill: "#1f2430" }),
-    path(
-      [
-        [450, 480],
-        [560, 330],
-        [700, 460],
-      ],
-    ),
+    path([
+      [450, 480],
+      [560, 330],
+      [700, 460],
+    ]),
     polygon([
       [700, 500],
       [880, 420],
@@ -710,11 +707,14 @@ export const DRAWINGS: Record<string, Drawing> = {
       [880, 380],
       [700, 460],
     ]),
-    polygon([
-      [820, 355],
-      [880, 380],
-      [820, 405],
-    ], { fill: "#1f2430" }),
+    polygon(
+      [
+        [820, 355],
+        [880, 380],
+        [820, 405],
+      ],
+      { fill: "#1f2430" },
+    ),
     rect(140, 300, 60, 160, RED),
     line(200, 380, 700, 380, THIN),
   ],
@@ -815,18 +815,24 @@ export const DRAWINGS: Record<string, Drawing> = {
     circle(730, 640, 90, THICK),
     circle(290, 640, 30),
     circle(730, 640, 30),
-    polygon([
-      [470, 360],
-      [580, 360],
-      [580, 450],
-      [410, 450],
-    ], THIN),
-    polygon([
-      [610, 360],
-      [710, 360],
-      [790, 450],
-      [610, 450],
-    ], THIN),
+    polygon(
+      [
+        [470, 360],
+        [580, 360],
+        [580, 450],
+        [410, 450],
+      ],
+      THIN,
+    ),
+    polygon(
+      [
+        [610, 360],
+        [710, 360],
+        [790, 450],
+        [610, 450],
+      ],
+      THIN,
+    ),
     line(590, 460, 590, 620, THIN),
     circle(880, 540, 20, YELLOW),
   ],

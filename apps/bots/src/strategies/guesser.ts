@@ -26,7 +26,10 @@ export interface GuesserStrategy {
 export const POOL_WORDS: readonly string[] = WORD_POOL.map((w) => w.word);
 
 /** Pool words whose pattern (word count and letter counts) matches. */
-export function wordsMatchingPattern(pattern: string, pool: readonly string[] = POOL_WORDS): string[] {
+export function wordsMatchingPattern(
+  pattern: string,
+  pool: readonly string[] = POOL_WORDS,
+): string[] {
   return pool.filter((w) => wordPattern(w) === pattern);
 }
 

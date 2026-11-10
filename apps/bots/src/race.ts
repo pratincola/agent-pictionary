@@ -57,7 +57,10 @@ export async function runRace(opts: RaceOptions): Promise<RaceResult> {
   await drawer.connect(room.code);
   const guessers: AgentClient[] = [];
   for (let i = 1; i <= n; i++) {
-    const c = new AgentClient({ baseUrl: opts.baseUrl, apiKey: (regs[i] as { apiKey: string }).apiKey });
+    const c = new AgentClient({
+      baseUrl: opts.baseUrl,
+      apiKey: (regs[i] as { apiKey: string }).apiKey,
+    });
     await c.connect(room.code);
     guessers.push(c);
   }
@@ -95,7 +98,7 @@ export async function runRace(opts: RaceOptions): Promise<RaceResult> {
   const seqs: RaceResult["seqs"] = [];
   for (let i = 0; i < settled.length; i++) {
     const m = settled[i];
-    if (!m || m.type !== "guess.result") continue;
+    if (m?.type !== "guess.result") continue;
     results[m.payload.result] = (results[m.payload.result] ?? 0) + 1;
     seqs.push({
       name: names.get(guessers[i]?.agentId ?? "") ?? `#${i}`,
@@ -103,14 +106,18 @@ export async function runRace(opts: RaceOptions): Promise<RaceResult> {
       result: m.payload.result,
     });
   }
-  const correctSeqs = seqs.filter((s) => s.result === "correct" || s.result === "late").map((s) => s.seq);
+  const correctSeqs = seqs
+    .filter((s) => s.result === "correct" || s.result === "late")
+    .map((s) => s.seq);
   const audited = correctSeqs.length > 0 && winner.seq === Math.min(...correctSeqs);
   const winnerName = names.get(winner.agentId) ?? winner.agentId;
   out(`winner: ${winnerName} (${winner.agentId}) seq=${winner.seq} source=${winner.source}`);
   out(
     `results: ${Object.entries(results)
       .map(([k, v]) => `${k}=${v}`)
-      .join(" ")}; lowest correct seq=${Math.min(...correctSeqs)}; audit ${audited ? "OK" : "FAILED"}`,
+      .join(
+        " ",
+      )}; lowest correct seq=${Math.min(...correctSeqs)}; audit ${audited ? "OK" : "FAILED"}`,
   );
   await Promise.all([drawer.close(), ...guessers.map((g) => g.close())]);
   return {

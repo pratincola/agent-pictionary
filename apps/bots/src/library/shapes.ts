@@ -2,7 +2,13 @@
  * Small geometry helpers that produce protocol DrawOps on the 1000x1000
  * canvas. Coordinates are clamped and rounded so every op passes the schema.
  */
-import { CANVAS_SIZE, type DrawOp, type HexColor, type Point, type StrokeWidth } from "@pictionary/protocol";
+import {
+  CANVAS_SIZE,
+  type DrawOp,
+  type HexColor,
+  type Point,
+  type StrokeWidth,
+} from "@pictionary/protocol";
 
 export const INK: HexColor = "#1f2430";
 export const DEFAULT_WIDTH: StrokeWidth = 4;
@@ -123,7 +129,14 @@ export function zigzag(
 }
 
 /** Sine wave between x1..x2 at baseline y. */
-export function wave(x1: number, x2: number, y: number, periods: number, amp: number, s: Style = {}) {
+export function wave(
+  x1: number,
+  x2: number,
+  y: number,
+  periods: number,
+  amp: number,
+  s: Style = {},
+) {
   const pts: [number, number][] = [];
   const n = periods * 12;
   for (let i = 0; i <= n; i++) {
@@ -134,7 +147,14 @@ export function wave(x1: number, x2: number, y: number, periods: number, amp: nu
 }
 
 /** Regular star polygon centred at (cx, cy). */
-export function star(cx: number, cy: number, outer: number, inner: number, points = 5, s: Style = {}) {
+export function star(
+  cx: number,
+  cy: number,
+  outer: number,
+  inner: number,
+  points = 5,
+  s: Style = {},
+) {
   const pts: [number, number][] = [];
   for (let i = 0; i < points * 2; i++) {
     const r = i % 2 === 0 ? outer : inner;

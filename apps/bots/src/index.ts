@@ -2,7 +2,7 @@ export { Bot, type BotOptions, type RoundSummary } from "./bot.js";
 export { type DemoOptions, type DemoResult, runDemo, spectatorUrlFor } from "./demo.js";
 export { DRAWINGS, LIBRARY_WORDS } from "./library/drawings.js";
 export { generateLibrary } from "./library/generate.js";
-export { libraryDir, placeholderDrawing, slug, StrokeLibrary } from "./library/loader.js";
+export { libraryDir, placeholderDrawing, StrokeLibrary, slug } from "./library/loader.js";
 export * as shapes from "./library/shapes.js";
 export { type RaceOptions, type RaceResult, runRace } from "./race.js";
 export { animateOps, type DrawerStrategy, LibraryDrawer } from "./strategies/drawer.js";
