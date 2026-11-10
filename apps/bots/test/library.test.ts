@@ -1,11 +1,46 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { WORD_POOL } from "@pictionary/engine";
-import { DrawOp, DrawOpsPayload, normalizeGuess } from "@pictionary/protocol";
+import {
+  CANVAS_SIZE,
+  DrawOp,
+  DrawOpsPayload,
+  normalizeGuess,
+  type WordOption,
+} from "@pictionary/protocol";
+import { renderPng } from "@pictionary/render";
 import { describe, expect, it } from "vitest";
 import { DRAWINGS } from "../src/library/drawings.js";
+import { wordsByTier } from "../src/library/generate.js";
 import { libraryDir, placeholderDrawing, StrokeLibrary } from "../src/library/loader.js";
-import { animateOps } from "../src/strategies/drawer.js";
+import { INK_HEX, WHITE_HEX } from "../src/library/palette.js";
+import { animateOps, LibraryDrawer } from "../src/strategies/drawer.js";
+
+const MIN_OPS = 6;
+const MAX_OPS = 80;
+/** Drawings allowed more than two accent colors (the subject is the colors). */
+const COLOR_EXEMPT = new Set(["rainbow"]);
+
+function bounds(op: DrawOp): [number, number, number, number] {
+  switch (op.kind) {
+    case "path": {
+      const xs = op.points.map((p) => p[0]);
+      const ys = op.points.map((p) => p[1]);
+      return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
+    }
+    case "line":
+      return [
+        Math.min(op.from[0], op.to[0]),
+        Math.min(op.from[1], op.to[1]),
+        Math.max(op.from[0], op.to[0]),
+        Math.max(op.from[1], op.to[1]),
+      ];
+    case "rect":
+      return [op.x, op.y, op.x + op.w, op.y + op.h];
+    case "ellipse":
+      return [op.cx - op.rx, op.cy - op.ry, op.cx + op.rx, op.cy + op.ry];
+  }
+}
 
 describe("stroke library", () => {
   it("every programmatic drawing produces valid ops for a real pool word", () => {
@@ -20,6 +55,71 @@ describe("stroke library", () => {
       expect(pool.has(normalizeGuess(word)), `${word} is not in the pool`).toBe(true);
     }
     expect(Object.keys(DRAWINGS).length).toBeGreaterThanOrEqual(40);
+  });
+
+  it("covers every easy word in the pool", () => {
+    const lib = new StrokeLibrary();
+    const missing = WORD_POOL.filter((w) => w.difficulty === "easy" && !lib.has(w.word)).map(
+      (w) => w.word,
+    );
+    expect(missing).toEqual([]);
+    const tiers = wordsByTier();
+    expect(tiers.easy.length).toBeGreaterThanOrEqual(146);
+    expect(tiers.medium.length).toBeGreaterThanOrEqual(60);
+    expect(tiers.other).toEqual([]);
+  });
+
+  it("every drawing has 6-80 ops, stays in bounds and uses at most two accent colors", () => {
+    for (const [word, make] of Object.entries(DRAWINGS)) {
+      const ops = make();
+      expect(ops.length, `${word}: ${ops.length} ops`).toBeGreaterThanOrEqual(MIN_OPS);
+      expect(ops.length, `${word}: ${ops.length} ops`).toBeLessThanOrEqual(MAX_OPS);
+      const accents = new Set<string>();
+      for (const op of ops) {
+        const [x0, y0, x1, y1] = bounds(op);
+        expect(x0, `${word}: out of bounds`).toBeGreaterThanOrEqual(0);
+        expect(y0, `${word}: out of bounds`).toBeGreaterThanOrEqual(0);
+        expect(x1, `${word}: out of bounds`).toBeLessThanOrEqual(CANVAS_SIZE);
+        expect(y1, `${word}: out of bounds`).toBeLessThanOrEqual(CANVAS_SIZE);
+        for (const c of [op.color, "fill" in op ? op.fill : undefined]) {
+          if (c && c !== INK_HEX && c !== WHITE_HEX) accents.add(c);
+        }
+      }
+      if (!COLOR_EXEMPT.has(word)) {
+        expect(accents.size, `${word}: accents ${[...accents].join(",")}`).toBeLessThanOrEqual(2);
+      }
+    }
+  });
+
+  it("LibraryDrawer.choose prefers the option that is in the library", () => {
+    const options: WordOption[] = [
+      { index: 0, word: "photosynthesis", difficulty: "hard" },
+      { index: 1, word: "glacier", difficulty: "medium" },
+      { index: 2, word: "cat", difficulty: "easy" },
+    ];
+    const chosen: string[] = [];
+    const drawer = new LibraryDrawer({ onWord: (w) => chosen.push(w) });
+    expect(drawer.library.has("glacier")).toBe(false);
+    expect(drawer.choose(options)).toBe(2);
+    expect(chosen).toEqual(["cat"]);
+    // Nothing in the library: falls back to the first option.
+    expect(drawer.choose([options[0] as WordOption, options[1] as WordOption])).toBe(0);
+  });
+
+  it("renders a sample of entries to PNG", () => {
+    const words = Object.keys(DRAWINGS);
+    let seed = 12345;
+    const next = () => {
+      seed = (seed * 1103515245 + 12345) % 2 ** 31;
+      return seed;
+    };
+    for (let i = 0; i < 5; i++) {
+      const word = words[next() % words.length] as string;
+      const png = renderPng(DRAWINGS[word]?.() ?? [], { size: 128 });
+      expect(png.length, word).toBeGreaterThan(100);
+      // PNG signature
+      expect(png.subarray(0, 4).toString("hex")).toBe("89504e47");
+    }
   });
 
   it("the checked-in JSON files match the generator and parse as ops", () => {
