@@ -85,12 +85,14 @@ function waitFor(
   ws: WebSocket,
   type: string,
   timeoutMs = 30_000,
+  errors?: string[],
 ): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       ws.off("message", onMessage);
-      reject(new Error(`timeout waiting for ${type}`));
+      reject(new Error(`timeout waiting for ${type}; errors: ${(errors ?? []).join(" | ")}`));
     }, timeoutMs);
+    timer.unref();
     function onMessage(data: WebSocket.RawData) {
       const m = JSON.parse(data.toString()) as Record<string, unknown>;
       if (m.type === type) {
@@ -172,6 +174,7 @@ async function runRoom(roomIndex: number): Promise<RoomStats> {
       s.messagesIn++;
       // Cheap type sniff before the full parse: draw.op is the hot path.
       const text = data.toString();
+      if (text.startsWith('{"type":"error"')) errors.push(`${label}: ${text.slice(0, 200)}`);
       if (!text.startsWith('{"type":"draw.op"')) return;
       const m = JSON.parse(text) as { ts: number; payload: { opSeq: number } };
       s.drawOpsIn++;
@@ -183,17 +186,29 @@ async function runRoom(roomIndex: number): Promise<RoomStats> {
     ws.on("error", (err) => errors.push(`${label}: ${err.message}`));
   };
 
+  // Agents join one at a time (join order = drawer rotation); spectators in parallel.
   const agentSockets: WebSocket[] = [];
-  for (const sess of agentSessions) agentSockets.push(await open(sess.wsUrl, attach));
+  for (const sess of agentSessions) {
+    const ws = await open(sess.wsUrl, attach);
+    await stateWaits[stateWaits.length - 1];
+    agentSockets.push(ws);
+  }
   await Promise.all(spectatorSessions.map((sess) => open(sess.wsUrl, attach)));
   await Promise.all(stateWaits);
 
-  const drawer = agentSockets[0] as WebSocket;
-  const guessers = agentSockets.slice(1);
-  const choosing = waitFor(drawer, "round.wordOptions");
+  // round.choosing and round.wordOptions land in the same step: arm every
+  // waiter before the first room.ready goes out.
+  const choosing = waitFor(agentSockets[0] as WebSocket, "round.choosing", 30_000, errors);
+  const optionWaits = agentSockets.map((ws) =>
+    waitFor(ws, "round.wordOptions", 30_000, errors).catch(() => null),
+  );
   for (const ws of agentSockets) send(ws, "room.ready", {});
-  await choosing;
-  const started = waitFor(drawer, "round.started");
+  const drawerAgentId = (await choosing).payload as { drawerAgentId: string };
+  const drawerIndex = regs.findIndex((r) => r.agentId === drawerAgentId.drawerAgentId);
+  const drawer = agentSockets[drawerIndex] as WebSocket;
+  const guessers = agentSockets.filter((_, i) => i !== drawerIndex);
+  if (!(await optionWaits[drawerIndex])) throw new Error(`${label}: drawer got no word options`);
+  const started = waitFor(drawer, "round.started", 30_000, errors);
   send(drawer, "word.choose", { index: 0 });
   await started;
 
