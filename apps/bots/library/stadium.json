@@ -1,0 +1,136 @@
+{
+  "word": "stadium",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 540,
+      "rx": 430,
+      "ry": 200,
+      "width": 12,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 560,
+      "rx": 300,
+      "ry": 110,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 380,
+      "y": 520,
+      "w": 240,
+      "h": 80,
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [500, 520],
+      "to": [500, 600],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 560,
+      "rx": 30,
+      "ry": 30,
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [767, 610],
+      "to": [883, 631],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [636, 658],
+      "to": [695, 718],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [364, 658],
+      "to": [305, 718],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [233, 610],
+      "to": [117, 631],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [233, 510],
+      "to": [117, 449],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [364, 462],
+      "to": [305, 362],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [636, 462],
+      "to": [695, 362],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [767, 510],
+      "to": [883, 449],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [140, 420],
+      "to": [140, 160],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 100,
+      "y": 120,
+      "w": 80,
+      "h": 40,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [860, 420],
+      "to": [860, 160],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 820,
+      "y": 120,
+      "w": 80,
+      "h": 40,
+      "width": 8,
+      "color": "#1f2430"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "word": "cookie",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 500,
+      "rx": 300,
+      "ry": 300,
+      "width": 8,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 400,
+      "cy": 400,
+      "rx": 28,
+      "ry": 28,
+      "fill": "#1f2430",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 560,
+      "cy": 360,
+      "rx": 24,
+      "ry": 24,
+      "fill": "#1f2430",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 650,
+      "cy": 520,
+      "rx": 30,
+      "ry": 30,
+      "fill": "#1f2430",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 480,
+      "cy": 560,
+      "rx": 26,
+      "ry": 26,
+      "fill": "#1f2430",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 360,
+      "cy": 600,
+      "rx": 22,
+      "ry": 22,
+      "fill": "#1f2430",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 560,
+      "cy": 680,
+      "rx": 28,
+      "ry": 28,
+      "fill": "#1f2430",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "path",
+      "points": [
+        [353, 702],
+        [333, 686],
+        [314, 667],
+        [298, 647],
+        [283, 625],
+        [272, 602],
+        [262, 577]
+      ],
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}

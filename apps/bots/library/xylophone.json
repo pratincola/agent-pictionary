@@ -1,0 +1,133 @@
+{
+  "word": "xylophone",
+  "ops": [
+    {
+      "kind": "line",
+      "from": [140, 300],
+      "to": [860, 300],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [140, 700],
+      "to": [860, 700],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 170,
+      "y": 220,
+      "w": 60,
+      "h": 560,
+      "fill": "#c0392b",
+      "width": 4,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "rect",
+      "x": 255,
+      "y": 245,
+      "w": 60,
+      "h": 510,
+      "fill": "#2b6cb0",
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "rect",
+      "x": 340,
+      "y": 270,
+      "w": 60,
+      "h": 460,
+      "fill": "#c0392b",
+      "width": 4,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "rect",
+      "x": 425,
+      "y": 295,
+      "w": 60,
+      "h": 410,
+      "fill": "#2b6cb0",
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "rect",
+      "x": 510,
+      "y": 320,
+      "w": 60,
+      "h": 360,
+      "fill": "#c0392b",
+      "width": 4,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "rect",
+      "x": 595,
+      "y": 345,
+      "w": 60,
+      "h": 310,
+      "fill": "#2b6cb0",
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "rect",
+      "x": 680,
+      "y": 370,
+      "w": 60,
+      "h": 260,
+      "fill": "#c0392b",
+      "width": 4,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "rect",
+      "x": 765,
+      "y": 395,
+      "w": 60,
+      "h": 210,
+      "fill": "#2b6cb0",
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [160, 800],
+      "to": [420, 880],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 160,
+      "cy": 800,
+      "rx": 22,
+      "ry": 22,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [840, 800],
+      "to": [580, 880],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 840,
+      "cy": 800,
+      "rx": 22,
+      "ry": 22,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}

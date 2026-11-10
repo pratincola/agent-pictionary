@@ -1,0 +1,153 @@
+{
+  "word": "fire truck",
+  "ops": [
+    {
+      "kind": "rect",
+      "x": 100,
+      "y": 420,
+      "w": 800,
+      "h": 260,
+      "width": 8,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "path",
+      "points": [[640, 420], [640, 300], [800, 300], [900, 420], [640, 420]],
+      "width": 8,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "rect",
+      "x": 680,
+      "y": 330,
+      "w": 100,
+      "h": 90,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [150, 400],
+      "to": [650, 240],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [170, 450],
+      "to": [670, 290],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [250, 428],
+      "to": [250, 378],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [350, 396],
+      "to": [350, 346],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [450, 364],
+      "to": [450, 314],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [550, 332],
+      "to": [550, 282],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 240,
+      "cy": 720,
+      "rx": 75,
+      "ry": 75,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 240,
+      "cy": 720,
+      "rx": 23,
+      "ry": 23,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 520,
+      "cy": 720,
+      "rx": 75,
+      "ry": 75,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 520,
+      "cy": 720,
+      "rx": 23,
+      "ry": 23,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 780,
+      "cy": 720,
+      "rx": 75,
+      "ry": 75,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 780,
+      "cy": 720,
+      "rx": 23,
+      "ry": 23,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 820,
+      "y": 260,
+      "w": 60,
+      "h": 40,
+      "fill": "#e0a800",
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 400,
+      "cy": 560,
+      "rx": 40,
+      "ry": 40,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 300,
+      "cy": 560,
+      "rx": 40,
+      "ry": 40,
+      "width": 4,
+      "color": "#1f2430"
+    }
+  ]
+}

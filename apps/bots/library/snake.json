@@ -79,6 +79,48 @@
       "points": [[950, 500], [970, 520]],
       "width": 2,
       "color": "#c0392b"
+    },
+    {
+      "kind": "line",
+      "from": [200, 609],
+      "to": [200, 629],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [300, 638],
+      "to": [300, 658],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [400, 406],
+      "to": [400, 426],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [500, 322],
+      "to": [500, 342],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [600, 533],
+      "to": [600, 553],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [700, 669],
+      "to": [700, 689],
+      "width": 4,
+      "color": "#2f855a"
     }
   ]
 }

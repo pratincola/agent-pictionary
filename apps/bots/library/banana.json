@@ -104,6 +104,36 @@
       "to": [100, 350],
       "width": 4,
       "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 140,
+      "cy": 400,
+      "rx": 10,
+      "ry": 10,
+      "fill": "#8b5a2b",
+      "width": 2,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 600,
+      "cy": 560,
+      "rx": 5,
+      "ry": 5,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 520,
+      "cy": 590,
+      "rx": 5,
+      "ry": 5,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
     }
   ]
 }

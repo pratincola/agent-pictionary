@@ -1,0 +1,111 @@
+{
+  "word": "grape",
+  "ops": [
+    {
+      "kind": "line",
+      "from": [500, 360],
+      "to": [530, 180],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 620,
+      "cy": 260,
+      "rx": 80,
+      "ry": 40,
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 350,
+      "cy": 420,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 450,
+      "cy": 420,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 550,
+      "cy": 420,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 650,
+      "cy": 420,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 400,
+      "cy": 510,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 510,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 600,
+      "cy": 510,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 450,
+      "cy": 600,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 550,
+      "cy": 600,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 690,
+      "rx": 52,
+      "ry": 52,
+      "width": 4,
+      "color": "#6b46c1"
+    }
+  ]
+}

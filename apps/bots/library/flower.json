@@ -6,7 +6,7 @@
       "from": [500, 560],
       "to": [500, 920],
       "width": 4,
-      "color": "#2f855a"
+      "color": "#1f2430"
     },
     {
       "kind": "ellipse",
@@ -15,7 +15,7 @@
       "rx": 80,
       "ry": 35,
       "width": 4,
-      "color": "#2f855a"
+      "color": "#1f2430"
     },
     {
       "kind": "ellipse",
@@ -24,7 +24,7 @@
       "rx": 80,
       "ry": 35,
       "width": 4,
-      "color": "#2f855a"
+      "color": "#1f2430"
     },
     {
       "kind": "ellipse",

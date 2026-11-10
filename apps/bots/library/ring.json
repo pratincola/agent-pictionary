@@ -1,0 +1,71 @@
+{
+  "word": "ring",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 610,
+      "rx": 230,
+      "ry": 230,
+      "width": 12,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 610,
+      "rx": 180,
+      "ry": 180,
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "path",
+      "points": [[500, 230], [610, 330], [500, 420], [390, 330], [500, 230]],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [390, 330],
+      "to": [610, 330],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [440, 280],
+      "to": [560, 280],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [440, 280],
+      "to": [500, 420],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [560, 280],
+      "to": [500, 420],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [664, 200],
+      "to": [736, 200],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [700, 164],
+      "to": [700, 236],
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}

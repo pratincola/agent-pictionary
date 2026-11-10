@@ -1,0 +1,133 @@
+{
+  "word": "bee",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 520,
+      "cy": 580,
+      "rx": 220,
+      "ry": 130,
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "line",
+      "from": [440, 459],
+      "to": [440, 701],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [520, 450],
+      "to": [520, 710],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [600, 459],
+      "to": [600, 701],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 260,
+      "cy": 560,
+      "rx": 75,
+      "ry": 75,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 240,
+      "cy": 540,
+      "rx": 12,
+      "ry": 12,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [230, 490],
+      "to": [180, 400],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [280, 490],
+      "to": [290, 390],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 180,
+      "cy": 400,
+      "rx": 8,
+      "ry": 8,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 290,
+      "cy": 390,
+      "rx": 8,
+      "ry": 8,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 430,
+      "cy": 390,
+      "rx": 100,
+      "ry": 60,
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 610,
+      "cy": 390,
+      "rx": 100,
+      "ry": 60,
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "path",
+      "points": [[735, 560], [830, 580], [735, 600], [735, 560]],
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [420, 700],
+      "to": [400, 780],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [520, 710],
+      "to": [520, 790],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [620, 700],
+      "to": [640, 780],
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}

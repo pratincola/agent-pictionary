@@ -1,0 +1,71 @@
+{
+  "word": "seesaw",
+  "ops": [
+    {
+      "kind": "path",
+      "points": [[420, 900], [580, 900], [500, 600], [420, 900]],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [120, 720],
+      "to": [880, 460],
+      "width": 12,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "line",
+      "from": [140, 700],
+      "to": [150, 640],
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [860, 440],
+      "to": [850, 380],
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 230,
+      "cy": 600,
+      "rx": 50,
+      "ry": 50,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [230, 650],
+      "to": [230, 690],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 770,
+      "cy": 330,
+      "rx": 50,
+      "ry": 50,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [770, 380],
+      "to": [770, 420],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [60, 900],
+      "to": [940, 900],
+      "width": 8,
+      "color": "#1f2430"
+    }
+  ]
+}

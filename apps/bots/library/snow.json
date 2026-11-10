@@ -1,0 +1,255 @@
+{
+  "word": "snow",
+  "ops": [
+    {
+      "kind": "line",
+      "from": [500, 500],
+      "to": [830, 500],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [500, 500],
+      "to": [665, 786],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [500, 500],
+      "to": [335, 786],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [500, 500],
+      "to": [170, 500],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [500, 500],
+      "to": [335, 214],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [500, 500],
+      "to": [665, 214],
+      "width": 8,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [720, 500],
+      "to": [778, 540],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [720, 500],
+      "to": [778, 460],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [610, 691],
+      "to": [605, 760],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [610, 691],
+      "to": [673, 721],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [390, 691],
+      "to": [327, 721],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [390, 691],
+      "to": [395, 760],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [280, 500],
+      "to": [222, 460],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [280, 500],
+      "to": [222, 540],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [390, 309],
+      "to": [395, 240],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [390, 309],
+      "to": [327, 279],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [610, 309],
+      "to": [673, 279],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [610, 309],
+      "to": [605, 240],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [620, 500],
+      "to": [658, 532],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [620, 500],
+      "to": [658, 468],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [560, 604],
+      "to": [551, 653],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [560, 604],
+      "to": [607, 621],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [440, 604],
+      "to": [393, 621],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [440, 604],
+      "to": [449, 653],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [380, 500],
+      "to": [342, 468],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [380, 500],
+      "to": [342, 532],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [440, 396],
+      "to": [449, 347],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [440, 396],
+      "to": [393, 379],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [560, 396],
+      "to": [607, 379],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "line",
+      "from": [560, 396],
+      "to": [551, 347],
+      "width": 4,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 120,
+      "cy": 140,
+      "rx": 8,
+      "ry": 8,
+      "fill": "#2b6cb0",
+      "width": 2,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 880,
+      "cy": 200,
+      "rx": 8,
+      "ry": 8,
+      "fill": "#2b6cb0",
+      "width": 2,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 860,
+      "cy": 860,
+      "rx": 8,
+      "ry": 8,
+      "fill": "#2b6cb0",
+      "width": 2,
+      "color": "#2b6cb0"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 140,
+      "cy": 820,
+      "rx": 8,
+      "ry": 8,
+      "fill": "#2b6cb0",
+      "width": 2,
+      "color": "#2b6cb0"
+    }
+  ]
+}

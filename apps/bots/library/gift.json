@@ -1,0 +1,82 @@
+{
+  "word": "gift",
+  "ops": [
+    {
+      "kind": "rect",
+      "x": 200,
+      "y": 470,
+      "w": 600,
+      "h": 400,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 170,
+      "y": 360,
+      "w": 660,
+      "h": 110,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 470,
+      "y": 360,
+      "w": 60,
+      "h": 510,
+      "fill": "#c0392b",
+      "width": 4,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "line",
+      "from": [170, 415],
+      "to": [830, 415],
+      "width": 8,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 410,
+      "cy": 290,
+      "rx": 80,
+      "ry": 50,
+      "width": 8,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 590,
+      "cy": 290,
+      "rx": 80,
+      "ry": 50,
+      "width": 8,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 320,
+      "rx": 20,
+      "ry": 20,
+      "fill": "#c0392b",
+      "width": 2,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "line",
+      "from": [500, 320],
+      "to": [430, 360],
+      "width": 4,
+      "color": "#c0392b"
+    },
+    {
+      "kind": "line",
+      "from": [500, 320],
+      "to": [570, 360],
+      "width": 4,
+      "color": "#c0392b"
+    }
+  ]
+}

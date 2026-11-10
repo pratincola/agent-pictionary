@@ -1,0 +1,114 @@
+{
+  "word": "bear",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 540,
+      "cy": 650,
+      "rx": 270,
+      "ry": 200,
+      "width": 4,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 330,
+      "cy": 380,
+      "rx": 140,
+      "ry": 140,
+      "width": 4,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 230,
+      "cy": 270,
+      "rx": 45,
+      "ry": 45,
+      "width": 4,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 430,
+      "cy": 270,
+      "rx": 45,
+      "ry": 45,
+      "width": 4,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 265,
+      "cy": 430,
+      "rx": 65,
+      "ry": 48,
+      "width": 4,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 240,
+      "cy": 415,
+      "rx": 14,
+      "ry": 14,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 370,
+      "cy": 350,
+      "rx": 12,
+      "ry": 12,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [380, 820],
+      "to": [380, 920],
+      "width": 8,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "line",
+      "from": [480, 840],
+      "to": [480, 920],
+      "width": 8,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "line",
+      "from": [620, 840],
+      "to": [620, 920],
+      "width": 8,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "line",
+      "from": [720, 820],
+      "to": [720, 920],
+      "width": 8,
+      "color": "#8b5a2b"
+    },
+    {
+      "kind": "path",
+      "points": [
+        [329, 466],
+        [326, 475],
+        [320, 483],
+        [311, 488],
+        [302, 490],
+        [292, 489],
+        [283, 485],
+        [276, 478],
+        [271, 469]
+      ],
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "word": "orange",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 400,
+      "cy": 560,
+      "rx": 260,
+      "ry": 260,
+      "width": 8,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [400, 300],
+      "to": [400, 250],
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 480,
+      "cy": 240,
+      "rx": 80,
+      "ry": 32,
+      "width": 4,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 780,
+      "cy": 700,
+      "rx": 150,
+      "ry": 150,
+      "width": 8,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 780,
+      "cy": 700,
+      "rx": 120,
+      "ry": 120,
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [900, 700],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [865, 785],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [780, 820],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [695, 785],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [660, 700],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [695, 615],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [780, 580],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [780, 700],
+      "to": [865, 615],
+      "width": 4,
+      "color": "#e67e22"
+    }
+  ]
+}

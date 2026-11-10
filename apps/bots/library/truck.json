@@ -1,0 +1,107 @@
+{
+  "word": "truck",
+  "ops": [
+    {
+      "kind": "path",
+      "points": [[100, 660], [100, 440], [180, 340], [380, 340], [380, 660], [100, 660]],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 380,
+      "y": 280,
+      "w": 520,
+      "h": 380,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 140,
+      "y": 380,
+      "w": 200,
+      "h": 120,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 210,
+      "cy": 700,
+      "rx": 70,
+      "ry": 70,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 210,
+      "cy": 700,
+      "rx": 21,
+      "ry": 21,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 540,
+      "cy": 700,
+      "rx": 70,
+      "ry": 70,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 540,
+      "cy": 700,
+      "rx": 21,
+      "ry": 21,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 790,
+      "cy": 700,
+      "rx": 70,
+      "ry": 70,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 790,
+      "cy": 700,
+      "rx": 21,
+      "ry": 21,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [100, 660],
+      "to": [900, 660],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 110,
+      "cy": 560,
+      "rx": 14,
+      "ry": 14,
+      "fill": "#e0a800",
+      "width": 2,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "line",
+      "from": [420, 320],
+      "to": [860, 320],
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}

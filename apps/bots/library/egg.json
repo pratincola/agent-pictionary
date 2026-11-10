@@ -86,6 +86,39 @@
       ],
       "width": 2,
       "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 900,
+      "rx": 260,
+      "ry": 40,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [300, 860],
+      "to": [340, 820],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [700, 860],
+      "to": [660, 820],
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 600,
+      "cy": 300,
+      "rx": 5,
+      "ry": 5,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
     }
   ]
 }

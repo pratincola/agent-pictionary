@@ -1,0 +1,82 @@
+{
+  "word": "penguin",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 560,
+      "rx": 210,
+      "ry": 290,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 500,
+      "cy": 620,
+      "rx": 140,
+      "ry": 200,
+      "fill": "#ffffff",
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 445,
+      "cy": 330,
+      "rx": 12,
+      "ry": 12,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 555,
+      "cy": 330,
+      "rx": 12,
+      "ry": 12,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "path",
+      "points": [[465, 380], [535, 380], [500, 440], [465, 380]],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "path",
+      "points": [[300, 440], [200, 680], [310, 660]],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "path",
+      "points": [[700, 440], [800, 680], [690, 660]],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 430,
+      "cy": 870,
+      "rx": 65,
+      "ry": 25,
+      "fill": "#e67e22",
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 570,
+      "cy": 870,
+      "rx": 65,
+      "ry": 25,
+      "fill": "#e67e22",
+      "width": 4,
+      "color": "#e67e22"
+    }
+  ]
+}

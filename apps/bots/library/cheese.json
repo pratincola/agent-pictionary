@@ -1,0 +1,62 @@
+{
+  "word": "cheese",
+  "ops": [
+    {
+      "kind": "path",
+      "points": [[100, 720], [900, 720], [900, 400], [100, 580], [100, 720]],
+      "width": 8,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "path",
+      "points": [[100, 580], [900, 400], [760, 320], [100, 500], [100, 580]],
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 300,
+      "cy": 650,
+      "rx": 40,
+      "ry": 40,
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 520,
+      "cy": 600,
+      "rx": 55,
+      "ry": 55,
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 760,
+      "cy": 560,
+      "rx": 35,
+      "ry": 35,
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 420,
+      "cy": 560,
+      "rx": 22,
+      "ry": 22,
+      "width": 4,
+      "color": "#e0a800"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 680,
+      "cy": 660,
+      "rx": 24,
+      "ry": 24,
+      "width": 4,
+      "color": "#e0a800"
+    }
+  ]
+}

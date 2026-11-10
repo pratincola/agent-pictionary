@@ -1,0 +1,60 @@
+{
+  "word": "carrot",
+  "ops": [
+    {
+      "kind": "path",
+      "points": [[320, 320], [480, 320], [410, 920], [320, 320]],
+      "width": 8,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [340, 450],
+      "to": [460, 450],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [355, 560],
+      "to": [445, 560],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [370, 680],
+      "to": [430, 680],
+      "width": 4,
+      "color": "#e67e22"
+    },
+    {
+      "kind": "line",
+      "from": [400, 310],
+      "to": [320, 120],
+      "width": 8,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [400, 310],
+      "to": [410, 90],
+      "width": 8,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [400, 310],
+      "to": [500, 140],
+      "width": 8,
+      "color": "#2f855a"
+    },
+    {
+      "kind": "line",
+      "from": [400, 310],
+      "to": [560, 230],
+      "width": 8,
+      "color": "#2f855a"
+    }
+  ]
+}

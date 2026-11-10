@@ -1,0 +1,101 @@
+{
+  "word": "microwave",
+  "ops": [
+    {
+      "kind": "rect",
+      "x": 120,
+      "y": 300,
+      "w": 760,
+      "h": 400,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 170,
+      "y": 350,
+      "w": 480,
+      "h": 300,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 220,
+      "y": 400,
+      "w": 380,
+      "h": 200,
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 690,
+      "y": 350,
+      "w": 140,
+      "h": 300,
+      "width": 4,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 760,
+      "cy": 420,
+      "rx": 14,
+      "ry": 14,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 760,
+      "cy": 500,
+      "rx": 14,
+      "ry": 14,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 760,
+      "cy": 580,
+      "rx": 14,
+      "ry": 14,
+      "fill": "#1f2430",
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [610, 380],
+      "to": [610, 620],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 410,
+      "cy": 580,
+      "rx": 120,
+      "ry": 24,
+      "width": 2,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [160, 700],
+      "to": [160, 740],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [840, 700],
+      "to": [840, 740],
+      "width": 8,
+      "color": "#1f2430"
+    }
+  ]
+}

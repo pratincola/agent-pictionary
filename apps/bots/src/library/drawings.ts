@@ -1,36 +1,33 @@
 /**
- * Programmatic line drawings for common pool words. Each returns ops in
- * drawing order (outline first, details last) so a streamed drawing reads
- * well as it appears. Everything is built from circles, lines and polylines.
+ * Programmatic line drawings for pool words. Each returns ops in drawing
+ * order (outline first, details last) so a streamed drawing reads well as it
+ * appears. Everything is built from circles, lines and polylines. The base
+ * set lives here; themed sets live in drawings-*.ts and are merged below.
  */
 import type { DrawOp } from "@pictionary/protocol";
+import { ANIMALS } from "./drawings-animals.js";
+import { FOOD } from "./drawings-food.js";
+import { OBJECTS } from "./drawings-objects.js";
+import { PEOPLE } from "./drawings-people.js";
+import { PLACES } from "./drawings-places.js";
+import { BLUE, BROWN, GREEN, PI, RED, THICK, THIN, YELLOW } from "./palette.js";
 import {
   arc,
   circle,
+  dot,
   ellipse,
   heart,
   line,
   path,
   polygon,
   rect,
-  type Style,
   star,
   wave,
 } from "./shapes.js";
 
-const THICK: Style = { width: 8 };
-const THIN: Style = { width: 2 };
-const YELLOW: Style = { color: "#e0a800" };
-const RED: Style = { color: "#c0392b" };
-const BLUE: Style = { color: "#2b6cb0" };
-const GREEN: Style = { color: "#2f855a" };
-const BROWN: Style = { color: "#8b5a2b" };
-
 type Drawing = () => DrawOp[];
 
-const PI = Math.PI;
-
-export const DRAWINGS: Record<string, Drawing> = {
+const BASE: Record<string, Drawing> = {
   sun: () => [
     circle(500, 500, 160, { ...YELLOW, width: 8 }),
     ...Array.from({ length: 12 }, (_, i) => {
@@ -48,19 +45,41 @@ export const DRAWINGS: Record<string, Drawing> = {
   moon: () => [
     arc(500, 500, 280, -PI / 2, PI / 2, THICK),
     arc(400, 500, 300, PI / 2 - 0.42, -PI / 2 + 0.42, THICK, 32),
-    circle(300, 250, 6, THIN),
-    circle(250, 330, 5, THIN),
+    circle(560, 400, 22, THIN),
+    circle(620, 560, 30, THIN),
+    circle(540, 680, 18, THIN),
+    star(220, 220, 30, 12, 5, { ...YELLOW, fill: "#e0a800" }),
+    star(180, 520, 22, 9, 5, { ...YELLOW, fill: "#e0a800" }),
+    star(260, 780, 26, 10, 5, { ...YELLOW, fill: "#e0a800" }),
   ],
 
-  star: () => [star(500, 520, 320, 130, 5, THICK)],
+  star: () => [
+    star(500, 520, 320, 130, 5, THICK),
+    star(500, 520, 200, 80, 5, THIN),
+    star(140, 160, 40, 16, 5, { ...YELLOW, fill: "#e0a800" }),
+    star(860, 140, 32, 13, 5, { ...YELLOW, fill: "#e0a800" }),
+    star(880, 820, 36, 14, 5, { ...YELLOW, fill: "#e0a800" }),
+    star(120, 860, 28, 11, 5, { ...YELLOW, fill: "#e0a800" }),
+  ],
 
-  heart: () => [heart(500, 480, 320, { ...RED, width: 8 })],
+  heart: () => [
+    heart(500, 480, 320, { ...RED, width: 8 }),
+    heart(500, 500, 200, { ...RED, width: 2 }),
+    arc(370, 340, 70, PI * 1.05, PI * 1.45, THIN, 8),
+    line(160, 180, 190, 150, THIN),
+    line(840, 180, 810, 150, THIN),
+    line(500, 90, 500, 50, THIN),
+  ],
 
   cloud: () => [
     arc(380, 540, 120, PI * 0.6, PI * 1.55, THICK),
     arc(500, 460, 150, PI * 1.05, PI * 1.95, THICK),
     arc(650, 540, 120, PI * 1.45, PI * 2.4, THICK),
     line(300, 650, 720, 650, THICK),
+    arc(230, 820, 60, PI * 0.6, PI * 1.55, {}, 10),
+    arc(300, 780, 75, PI * 1.05, PI * 1.95, {}, 10),
+    arc(370, 820, 60, PI * 1.45, PI * 2.4, {}, 10),
+    line(190, 875, 410, 875),
   ],
 
   rain: () => [
@@ -217,8 +236,10 @@ export const DRAWINGS: Record<string, Drawing> = {
   apple: () => [
     circle(500, 560, 260, { ...RED, width: 8 }),
     arc(500, 320, 60, PI * 0.9, PI * 1.6, { ...RED, width: 8 }, 12),
-    line(500, 300, 520, 200, BROWN),
+    line(500, 300, 520, 200),
     ellipse(600, 240, 80, 35, GREEN),
+    line(540, 240, 660, 235, { ...GREEN, width: 2 }),
+    arc(380, 520, 120, PI * 1.05, PI * 1.4, { ...RED, width: 2 }, 8),
   ],
 
   banana: () => [
@@ -239,6 +260,9 @@ export const DRAWINGS: Record<string, Drawing> = {
     arc(500, 220, 345, PI * 0.2, PI * 0.8, { ...YELLOW, width: 2 }, 24),
     line(860, 400, 900, 350, BROWN),
     line(140, 400, 100, 350, BROWN),
+    dot(140, 400, 10, "#8b5a2b"),
+    dot(600, 560, 5),
+    dot(520, 590, 5),
   ],
 
   ball: () => [
@@ -311,6 +335,8 @@ export const DRAWINGS: Record<string, Drawing> = {
     circle(620, 560, 18, { fill: "#1f2430" }),
     rect(380, 240, 240, 220, THIN),
     rect(380, 520, 240, 320, THIN),
+    line(300, 900, 700, 900, THICK),
+    circle(520, 560, 40, THIN),
   ],
 
   window: () => [
@@ -326,6 +352,8 @@ export const DRAWINGS: Record<string, Drawing> = {
       ],
       THIN,
     ),
+    line(530, 230, 530, 470, THIN),
+    line(530, 530, 530, 770, THIN),
   ],
 
   hat: () => [
@@ -333,6 +361,8 @@ export const DRAWINGS: Record<string, Drawing> = {
     rect(320, 250, 360, 400),
     rect(320, 560, 360, 60, { fill: "#1f2430" }),
     arc(500, 250, 180, PI, PI * 2, {}, 16),
+    line(360, 400, 360, 540, THIN),
+    arc(500, 650, 300, PI * 0.1, PI * 0.9, THIN, 12),
   ],
 
   cup: () => [
@@ -355,6 +385,7 @@ export const DRAWINGS: Record<string, Drawing> = {
       ],
       THIN,
     ),
+    ellipse(475, 300, 130, 24, THIN),
   ],
 
   key: () => [
@@ -395,9 +426,9 @@ export const DRAWINGS: Record<string, Drawing> = {
   ],
 
   flower: () => [
-    line(500, 560, 500, 920, GREEN),
-    ellipse(430, 780, 80, 35, GREEN),
-    ellipse(570, 840, 80, 35, GREEN),
+    line(500, 560, 500, 920),
+    ellipse(430, 780, 80, 35),
+    ellipse(570, 840, 80, 35),
     ...Array.from({ length: 6 }, (_, i) => {
       const a = (i / 6) * PI * 2;
       return circle(500 + 110 * Math.cos(a), 420 + 110 * Math.sin(a), 70, RED);
@@ -424,6 +455,15 @@ export const DRAWINGS: Record<string, Drawing> = {
       [480, 560],
     ]),
     wave(100, 900, 800, 4, 20, BLUE),
+    line(500, 180, 500, 120, THIN),
+    polygon(
+      [
+        [500, 120],
+        [580, 145],
+        [500, 170],
+      ],
+      { ...RED, fill: "#c0392b" },
+    ),
   ],
 
   sailboat: () => DRAWINGS.boat!(),
@@ -454,6 +494,10 @@ export const DRAWINGS: Record<string, Drawing> = {
       THICK,
     ),
     arc(420, 420, 60, PI * 0.9, PI * 1.4, THIN, 10),
+    ellipse(500, 900, 260, 40, THICK),
+    line(300, 860, 340, 820, THIN),
+    line(700, 860, 660, 820, THIN),
+    dot(600, 300, 5),
   ],
 
   pizza: () => [
@@ -506,6 +550,15 @@ export const DRAWINGS: Record<string, Drawing> = {
       ],
       { ...RED, width: 2 },
     ),
+    ...[200, 300, 400, 500, 600, 700].map((x) =>
+      line(
+        x,
+        500 + Math.sin(((x - 150) / 650) * PI * 3) * 180 - 10,
+        x,
+        500 + Math.sin(((x - 150) / 650) * PI * 3) * 180 + 10,
+        { color: "#2f855a", width: 4 },
+      ),
+    ),
   ],
 
   umbrella: () => [
@@ -543,6 +596,8 @@ export const DRAWINGS: Record<string, Drawing> = {
     arc(500, 480, 70, PI, PI * 2, {}, 10),
     line(170, 480, 70, 420, THICK),
     line(830, 480, 930, 420, THICK),
+    arc(280, 440, 90, PI * 1.1, PI * 1.5, THIN, 8),
+    arc(620, 440, 90, PI * 1.1, PI * 1.5, THIN, 8),
   ],
 
   ladder: () => [
@@ -605,6 +660,15 @@ export const DRAWINGS: Record<string, Drawing> = {
       THIN,
     ),
     arc(400, 300, 100, PI * 1.05, PI * 1.45, THIN, 8),
+    ellipse(780, 300, 120, 150, { ...BLUE, width: 4 }),
+    path(
+      [
+        [780, 450],
+        [760, 520],
+        [800, 600],
+      ],
+      THIN,
+    ),
   ],
 
   rocket: () => [
@@ -620,7 +684,7 @@ export const DRAWINGS: Record<string, Drawing> = {
       [700, 760],
       [600, 720],
     ]),
-    circle(500, 440, 50, BLUE),
+    circle(500, 440, 50),
     polygon(
       [
         [430, 720],
@@ -667,6 +731,8 @@ export const DRAWINGS: Record<string, Drawing> = {
     ),
     line(50, 820, 950, 820, THICK),
     circle(820, 200, 60, YELLOW),
+    line(140, 660, 200, 560, THIN),
+    line(860, 640, 800, 560, THIN),
   ],
 
   train: () => [
@@ -717,6 +783,8 @@ export const DRAWINGS: Record<string, Drawing> = {
     ),
     rect(140, 300, 60, 160, RED),
     line(200, 380, 700, 380, THIN),
+    line(200, 340, 700, 340, THIN),
+    line(200, 420, 700, 420, THIN),
   ],
 
   snowman: () => [
@@ -780,6 +848,12 @@ export const DRAWINGS: Record<string, Drawing> = {
       ],
       { ...YELLOW, width: 8 },
     ),
+    arc(330, 140, 90, PI * 0.6, PI * 1.55, {}, 12),
+    arc(450, 90, 110, PI * 1.05, PI * 1.95, {}, 12),
+    arc(580, 140, 90, PI * 1.45, PI * 2.4, {}, 12),
+    line(260, 220, 640, 220),
+    line(760, 300, 820, 250, YELLOW),
+    line(780, 420, 850, 400, YELLOW),
   ],
 
   tent: () => [
@@ -919,6 +993,15 @@ export const DRAWINGS: Record<string, Drawing> = {
     circle(500, 530, 50, THIN),
     rect(400, 620, 200, 90, THIN),
   ],
+};
+
+export const DRAWINGS: Record<string, Drawing> = {
+  ...BASE,
+  ...ANIMALS,
+  ...FOOD,
+  ...PEOPLE,
+  ...OBJECTS,
+  ...PLACES,
 };
 
 export const LIBRARY_WORDS: readonly string[] = Object.keys(DRAWINGS);

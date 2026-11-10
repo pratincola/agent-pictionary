@@ -1,0 +1,72 @@
+{
+  "word": "bone",
+  "ops": [
+    {
+      "kind": "ellipse",
+      "cx": 250,
+      "cy": 440,
+      "rx": 80,
+      "ry": 80,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 250,
+      "cy": 560,
+      "rx": 80,
+      "ry": 80,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 750,
+      "cy": 440,
+      "rx": 80,
+      "ry": 80,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "ellipse",
+      "cx": 750,
+      "cy": 560,
+      "rx": 80,
+      "ry": 80,
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "rect",
+      "x": 270,
+      "y": 420,
+      "w": 460,
+      "h": 160,
+      "fill": "#ffffff",
+      "width": 1,
+      "color": "#ffffff"
+    },
+    {
+      "kind": "line",
+      "from": [270, 430],
+      "to": [730, 430],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [270, 570],
+      "to": [730, 570],
+      "width": 8,
+      "color": "#1f2430"
+    },
+    {
+      "kind": "line",
+      "from": [400, 500],
+      "to": [600, 500],
+      "width": 2,
+      "color": "#1f2430"
+    }
+  ]
+}
