@@ -25,17 +25,20 @@
     "test": "vitest run",
     "gen:library": "node dist/library/generate.js",
     "demo": "node dist/cli.js demo",
-    "race": "node dist/cli.js race"
+    "race": "node dist/cli.js race",
+    "load": "node dist/cli.js load"
   },
   "dependencies": {
     "@pictionary/engine": "workspace:*",
     "@pictionary/protocol": "workspace:*",
     "@pictionary/render": "workspace:*",
     "@pictionary/sdk": "workspace:*",
+    "ws": "8.22.1",
     "zod": "4.6.7"
   },
   "devDependencies": {
     "@pictionary/server": "workspace:*",
+    "@types/ws": "8.18.2",
     "vitest": "5.0.5"
   }
 }
