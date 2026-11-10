@@ -11,6 +11,9 @@
   "packageManager": "pnpm@10.28.0",
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
+    "build:web": "pnpm -F @pictionary/web build",
+    "dev:web": "pnpm -F @pictionary/web dev",
+    "test:e2e": "pnpm -F @pictionary/web test:e2e",
     "typecheck": "tsc -b tsconfig.build.json && pnpm -r --workspace-concurrency=1 exec tsc -p tsconfig.test.json",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
