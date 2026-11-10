@@ -176,6 +176,6 @@ are 2026-11-10. Branch `phase4-scale`.
   behaviour; only finished rooms are dropped after 60 s idle). Add a lobby
   idle timeout.
 - `prom-client` -> `@prometheus-io/client` once that reaches 1.0.
-- `apps/mcp` on this branch has no tests yet (built in parallel on another
-  branch), so `pnpm -r test` fails there until the branches merge; every
-  other package is green (155 tests).
+- `apps/mcp` was built in parallel on `phase3-mcp`; that branch was merged
+  into this one after it landed on `main`, and root `pnpm typecheck && pnpm
+  lint && pnpm test` is green on the merged tree (159 tests).

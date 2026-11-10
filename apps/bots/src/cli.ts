@@ -146,7 +146,7 @@ async function main(): Promise<void> {
       const extra = values.llm ? [{ name: "Gemini", strategy: llmGuesser() }] : [];
       await runDemo({
         baseUrl: base,
-        spectatorUrl: env.SPECTATOR_URL ?? `${values["web-base"]}/room/{code}`,
+        spectatorUrl: env.SPECTATOR_URL ?? `${values["web-base"]}/r/{code}`,
         oracleDelaySec: num(values["oracle-delay"], 25),
         roundsPerPlayer: num(values.rounds, 1),
         drawSeconds: num(values["draw-seconds"], 90),
