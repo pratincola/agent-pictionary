@@ -56,3 +56,36 @@ PROTOCOL.md did not pin down. Each says why. Append new sections per piece.
   workspace packages under vitest 5 / vite 8, so tests need `pnpm build`
   (or `pnpm typecheck`, which emits) once before `pnpm test`; TESTING.md's
   one-command flow already does this.
+
+## `apps/bots` stroke library (2026-11-10)
+
+- **Every easy word has a drawing; medium is best effort (129/134).** The
+  engine offers one word per tier each round and `LibraryDrawer.choose`
+  takes the first option in the library, so full easy coverage means the
+  scripted drawer never falls back to the `?` placeholder unless all three
+  options are hard. `school`, `library`, `zoo`, `jungle` and `glacier` were
+  left out: as plain line icons each reads as another pool word (`house`,
+  `book`, an animal, `tree`, `mountain`), and a wrong-but-confident drawing
+  is worse than the placeholder. Hard words stay uncovered (abstract nouns).
+- **Drawings are code, JSON is generated.** `drawings*.ts` compose a small
+  set of primitives (`shapes.ts`) and reusable parts (`parts.ts`: quadruped
+  body, stick figure, face, wheel, flame). Op transforms (`translate`,
+  `scale`, `mirrorX`, `rotate`) let one shape serve several words (`horse` ->
+  `zebra`/`unicorn`, `barn` -> `farm`, a boxing glove and its mirror). The
+  JSON files are the artifact other clients consume; the test asserts they
+  equal the generator output so the two cannot drift.
+- **Budget per drawing: 6-80 ops, ink plus at most two accent colors.**
+  Enforced by tests (`rainbow` is the one exemption). The lower bound keeps a
+  streamed drawing from finishing in a second; the colour cap keeps the icons
+  consistent and stops colour alone from carrying the answer. A few base
+  drawings (`star`, `heart`, `lightning`, `egg`) gained context details
+  (small stars, a cloud, an egg cup) to meet the floor.
+- **Contact sheets are the review tool.** `gen:library` writes
+  `library/preview/contact-sheet-<tier>.png` with the word under each 256 px
+  tile. The label is canvas text in the preview only; the ops never contain
+  letters (the game bans them and no text op exists). Reviewing the sheets
+  drove two rounds of fixes (arm, shoe, boxing, mummy, pancake, pretzel, fox
+  tail, corn husk, mermaid tail, traffic light colours).
+- **`@napi-rs/canvas` is a direct dependency of bots** (same pinned version
+  as `packages/render`) only for the preview labels; `renderPng` from
+  `@pictionary/render` draws the tiles so previews match what spectators see.
