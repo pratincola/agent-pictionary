@@ -175,3 +175,195 @@ export function heart(cx: number, cy: number, size: number, s: Style = {}): Draw
   }
   return path(pts, s);
 }
+
+/** Filled circle (eye, nose, button). */
+export function dot(cx: number, cy: number, r: number, color: HexColor = INK): DrawOp {
+  return circle(cx, cy, r, { width: 2, color, fill: color });
+}
+
+/** `n` radial lines from radius r0 to r1 (sun rays, spokes, sparkle). */
+export function spokes(
+  cx: number,
+  cy: number,
+  r0: number,
+  r1: number,
+  n: number,
+  s: Style = {},
+  phase = 0,
+): DrawOp[] {
+  return Array.from({ length: n }, (_, i) => {
+    const a = phase + (i / n) * Math.PI * 2;
+    return line(
+      cx + r0 * Math.cos(a),
+      cy + r0 * Math.sin(a),
+      cx + r1 * Math.cos(a),
+      cy + r1 * Math.sin(a),
+      s,
+    );
+  });
+}
+
+/** Dashed line as `dashes` short line ops. */
+export function dashed(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  dashes: number,
+  s: Style = {},
+): DrawOp[] {
+  const out: DrawOp[] = [];
+  const n = dashes * 2 - 1;
+  for (let i = 0; i < n; i += 2) {
+    const t0 = i / n;
+    const t1 = (i + 1) / n;
+    out.push(
+      line(x1 + (x2 - x1) * t0, y1 + (y2 - y1) * t0, x1 + (x2 - x1) * t1, y1 + (y2 - y1) * t1, s),
+    );
+  }
+  return out;
+}
+
+/** Quadratic bezier from p0 to p1 bending toward control c. */
+export function curve(
+  p0: readonly [number, number],
+  ctrl: readonly [number, number],
+  p1: readonly [number, number],
+  s: Style = {},
+  segments = 16,
+): DrawOp {
+  const pts: [number, number][] = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const u = 1 - t;
+    pts.push([
+      u * u * p0[0] + 2 * u * t * ctrl[0] + t * t * p1[0],
+      u * u * p0[1] + 2 * u * t * ctrl[1] + t * t * p1[1],
+    ]);
+  }
+  return path(pts, s);
+}
+
+/** Sample points of a cubic bezier (for composing closed organic outlines). */
+export function cubicPoints(
+  p0: readonly [number, number],
+  c1: readonly [number, number],
+  c2: readonly [number, number],
+  p1: readonly [number, number],
+  segments = 16,
+): [number, number][] {
+  const pts: [number, number][] = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const u = 1 - t;
+    pts.push([
+      u ** 3 * p0[0] + 3 * u * u * t * c1[0] + 3 * u * t * t * c2[0] + t ** 3 * p1[0],
+      u ** 3 * p0[1] + 3 * u * u * t * c1[1] + 3 * u * t * t * c2[1] + t ** 3 * p1[1],
+    ]);
+  }
+  return pts;
+}
+
+/** Rectangle with rounded corners of radius r, as one closed path. */
+export function roundedRect(
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number,
+  s: Style = {},
+): DrawOp {
+  const rr = Math.min(r, w / 2, h / 2);
+  const corner = (cx: number, cy: number, a0: number): [number, number][] =>
+    Array.from({ length: 7 }, (_, i) => {
+      const a = a0 + (i / 6) * (Math.PI / 2);
+      return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)];
+    });
+  return polygon(
+    [
+      ...corner(x + w - rr, y + rr, -Math.PI / 2),
+      ...corner(x + w - rr, y + h - rr, 0),
+      ...corner(x + rr, y + h - rr, Math.PI / 2),
+      ...corner(x + rr, y + rr, Math.PI),
+    ],
+    s,
+  );
+}
+
+/** Regular polygon with `n` sides (hexagon, octagon) starting at angle `phase`. */
+export function ngon(
+  cx: number,
+  cy: number,
+  r: number,
+  n: number,
+  s: Style = {},
+  phase = -Math.PI / 2,
+): DrawOp {
+  return polygon(
+    Array.from({ length: n }, (_, i) => {
+      const a = phase + (i / n) * Math.PI * 2;
+      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    }),
+    s,
+  );
+}
+
+type PointMap = (x: number, y: number) => [number, number];
+
+/** Apply a point transform to every op. `k` scales radii and rect sizes. */
+export function mapOps(ops: readonly DrawOp[], f: PointMap, k = 1): DrawOp[] {
+  const out: DrawOp[] = [];
+  for (const op of ops) {
+    switch (op.kind) {
+      case "path":
+        out.push({ ...op, points: op.points.map(([x, y]) => pt(...f(x, y))) });
+        break;
+      case "line":
+        out.push({ ...op, from: pt(...f(...op.from)), to: pt(...f(...op.to)) });
+        break;
+      case "rect": {
+        const [ax, ay] = f(op.x, op.y);
+        const [bx, by] = f(op.x + op.w, op.y + op.h);
+        const st: Style = { width: op.width, color: op.color };
+        if (op.fill) st.fill = op.fill;
+        out.push(
+          rect(Math.min(ax, bx), Math.min(ay, by), Math.abs(bx - ax), Math.abs(by - ay), st),
+        );
+        break;
+      }
+      case "ellipse": {
+        const [cx, cy] = f(op.cx, op.cy);
+        const st: Style = { width: op.width, color: op.color };
+        if (op.fill) st.fill = op.fill;
+        out.push(ellipse(cx, cy, op.rx * Math.abs(k), op.ry * Math.abs(k), st));
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+export function translate(ops: readonly DrawOp[], dx: number, dy: number): DrawOp[] {
+  return mapOps(ops, (x, y) => [x + dx, y + dy]);
+}
+
+/** Scale about (ox, oy). Stroke widths are unchanged. */
+export function scale(ops: readonly DrawOp[], k: number, ox = 500, oy = 500): DrawOp[] {
+  return mapOps(ops, (x, y) => [ox + (x - ox) * k, oy + (y - oy) * k], k);
+}
+
+/** Mirror horizontally about x = axis. */
+export function mirrorX(ops: readonly DrawOp[], axis = 500): DrawOp[] {
+  return mapOps(ops, (x, y) => [2 * axis - x, y]);
+}
+
+/** Rotate by `rad` about (ox, oy). Ellipses keep their axes (only the centre moves). */
+export function rotate(ops: readonly DrawOp[], rad: number, ox = 500, oy = 500): DrawOp[] {
+  const cs = Math.cos(rad);
+  const sn = Math.sin(rad);
+  return mapOps(ops, (x, y) => {
+    const dx = x - ox;
+    const dy = y - oy;
+    return [ox + dx * cs - dy * sn, oy + dx * sn + dy * cs];
+  });
+}
