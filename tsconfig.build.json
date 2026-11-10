@@ -17,6 +17,9 @@
       "path": "apps/server"
     },
     {
+      "path": "apps/bots"
+    },
+    {
       "path": "apps/mcp"
     }
   ]

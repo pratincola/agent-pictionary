@@ -144,6 +144,17 @@ export class Repo {
     });
   }
 
+  /** Latest room row for a code (codes can be reused once a room is closed). */
+  async getRoomByCode(code: string): Promise<{ id: string; status: string } | null> {
+    const rows = await this.db
+      .select({ id: schema.rooms.id, status: schema.rooms.status })
+      .from(schema.rooms)
+      .where(eq(schema.rooms.code, code))
+      .orderBy(desc(schema.rooms.createdAt))
+      .limit(1);
+    return rows[0] ?? null;
+  }
+
   async setRoomStatus(roomId: string, status: string) {
     await this.db
       .update(schema.rooms)

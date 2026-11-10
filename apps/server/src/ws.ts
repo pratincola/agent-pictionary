@@ -16,15 +16,18 @@ import type { Logger } from "pino";
 import { type WebSocket, WebSocketServer } from "ws";
 import { verifySessionToken } from "./auth.js";
 import type { ServerConfig } from "./config.js";
+import type { Metrics } from "./metrics.js";
 import type { Repo } from "./repo.js";
-import type { Connection } from "./rooms/actor.js";
+import type { Connection, RoomActor } from "./rooms/actor.js";
 import type { RoomManager } from "./rooms/manager.js";
+import type { RemoteRoom } from "./rooms/remote.js";
 
 export interface WsDeps {
   config: ServerConfig;
   log: Logger;
   repo: Repo;
   rooms: RoomManager;
+  metrics?: Metrics;
 }
 
 /** Token bucket: `rate` tokens per second, burst = rate. */
@@ -65,20 +68,73 @@ export function attachWebSocket(server: Server, deps: WsDeps): WebSocketServer {
       return;
     }
     const actor = deps.rooms.get(claims.code);
-    if (!actor) {
-      socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
-      socket.destroy();
+    if (actor) {
+      wss.handleUpgrade(req, socket, head, (ws) => {
+        void onConnection(ws, claims, actor);
+      });
       return;
     }
-    wss.handleUpgrade(req, socket, head, (ws) => {
-      void onConnection(ws, claims, actor);
+    // Not ours. Spectators may watch through a relay; players must be on the owner.
+    void deps.rooms.locate(claims.code).then((loc) => {
+      if (loc.kind !== "remote" || claims.role !== "spectator") {
+        const status = loc.kind === "remote" ? "409 Conflict" : "404 Not Found";
+        socket.write(`HTTP/1.1 ${status}\r\n\r\n`);
+        socket.destroy();
+        return;
+      }
+      const relay = deps.rooms.relay(claims.code, loc.node);
+      wss.handleUpgrade(req, socket, head, (ws) => {
+        onRelayConnection(ws, claims, relay);
+      });
     });
   });
+
+  /** Read-only spectator on a node that does not own the room. */
+  function onRelayConnection(
+    ws: WebSocket,
+    claims: NonNullable<ReturnType<typeof verifySessionToken>>,
+    relay: RemoteRoom,
+  ) {
+    const conn: Connection = {
+      sessionId: claims.sid,
+      info: { sessionId: claims.sid, role: "spectator" },
+      send: (json) => {
+        if (ws.readyState === ws.OPEN) ws.send(json);
+      },
+      close: (code, reason) => {
+        try {
+          ws.close(code, reason);
+        } catch {
+          /* already closed */
+        }
+      },
+    };
+    ws.on("message", (data, isBinary) => {
+      deps.metrics?.wsMessages.inc({ direction: "in" });
+      if (isBinary) return;
+      let raw: unknown;
+      try {
+        raw = JSON.parse(data.toString("utf8"));
+      } catch {
+        return;
+      }
+      const loose = ClientEnvelopeLoose.safeParse(raw);
+      if (!loose.success) return;
+      relay.handle(conn, loose.data.type, loose.data.id);
+    });
+    ws.on("close", () => {
+      relay.detach(conn);
+      void deps.repo.markSessionDisconnected(claims.sid).catch(() => {});
+    });
+    ws.on("error", (err) => log.warn({ err, session: claims.sid }, "socket error"));
+    void relay.attach(conn);
+    void deps.repo.markSessionConnected(claims.sid).catch(() => {});
+  }
 
   async function onConnection(
     ws: WebSocket,
     claims: NonNullable<ReturnType<typeof verifySessionToken>>,
-    actor: ReturnType<RoomManager["get"]> & object,
+    actor: RoomActor,
   ) {
     const info: SessionInfo = { sessionId: claims.sid, role: claims.role };
     if (claims.agentId) info.agentId = claims.agentId;
@@ -138,6 +194,7 @@ export function attachWebSocket(server: Server, deps: WsDeps): WebSocketServer {
     ws.on("message", (data, isBinary) => {
       // Stamp receipt time before any parsing (PLAN.md §9.2).
       const recvNs = process.hrtime.bigint();
+      deps.metrics?.wsMessages.inc({ direction: "in" });
       if (isBinary) {
         sendError(undefined, "BAD_REQUEST", "binary frames are not supported");
         return;

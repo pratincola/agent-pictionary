@@ -19,6 +19,7 @@
     "lint:fix": "biome check --write .",
     "test": "pnpm -r --workspace-concurrency=1 test",
     "dev:services": "scripts/dev-services.sh",
+    "load": "pnpm build && pnpm -F @pictionary/bots load",
     "build:mcp": "pnpm -F @pictionary/mcp build",
     "mcp": "node apps/mcp/dist/main.js"
   },

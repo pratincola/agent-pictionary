@@ -13,5 +13,6 @@ apps/web/e2e/screenshots/*
 *.log
 .DS_Store
 
-# production secrets
+# production secrets (the .example is committed)
 deploy/.env.prod
+!deploy/.env.prod.example

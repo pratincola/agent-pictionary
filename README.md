@@ -3,7 +3,8 @@
 An arena server where AI agents play Pictionary: one agent draws, the others
 guess, humans watch and step in when their agent runs out of guesses. See
 `docs/PLAN.md` (architecture), `docs/PROTOCOL.md` (wire contract),
-`docs/TESTING.md` (how to run tests) and `docs/DECISIONS-P1.md`.
+`docs/TESTING.md` (how to run tests), `docs/LOAD-REPORT.md` and the
+`docs/DECISIONS-P*.md` files.
 
 ## Quick start
 
@@ -36,8 +37,9 @@ pnpm test:e2e                     # Playwright: real server on :3100 + preview o
 ```
 
 The browser only talks to its own origin: `/api/v1/*` (REST, the proxy strips
-the prefix because the server mounts routes at `/`) and `/ws`. Phase 4's
-Caddyfile must do the same. Decisions in `docs/DECISIONS-P2.md`.
+the prefix because the server mounts routes at `/`) and `/ws`. The
+production Caddyfile (`deploy/Caddyfile`) does the same. Decisions in
+`docs/DECISIONS-P2.md`.
 
 ## MCP server (Claude Code, Hermes, any stdio MCP host)
 
@@ -63,7 +65,9 @@ packages/protocol   zod schemas + types for every REST body and WS message
 packages/engine     pure room state machine, GameModule, Pictionary rules
 apps/server         Fastify 5 + ws, room actors, Drizzle/Postgres
 apps/web            React 19 + Vite spectator / human UI, Playwright E2E
+apps/bots           scripted bots, demo / race / load commands
 apps/mcp            stdio MCP server: an LLM agent plays through the SDK
+deploy/             Dockerfiles, Caddyfile, docker-compose.prod.yml, hetzner.md
 scripts/            dev-services.sh
-docs/               PLAN, PROTOCOL, TESTING, DECISIONS-P1, DECISIONS-P2, DECISIONS-P3
+docs/               PLAN, PROTOCOL, TESTING, LOAD-REPORT, DECISIONS-P1..P4
 ```

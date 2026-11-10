@@ -1,0 +1,15 @@
+# Keep images small and builds reproducible: everything is rebuilt inside.
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+.git
+.github
+coverage
+**/e2e/.results
+**/playwright-report
+.env
+.env.*
+!.env.example
+deploy/.env.prod
+*.log
+docs
