@@ -29,6 +29,8 @@ export async function startServer(
     sessionSecret: "test-secret-test-secret-test-secret",
     adminToken: "test-admin-token",
     outboxRetryMs: 500,
+    // Tests register hundreds of agents from one IP; the limits get their own test.
+    rateLimit: { agentsPerMinute: 100_000, roomsPerMinute: 100_000, canvasPerSecond: 100_000 },
     ...overrides,
   });
   await server.listen();
