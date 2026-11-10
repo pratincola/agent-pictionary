@@ -1,0 +1,41 @@
+{
+  "name": "@pictionary/bots",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Scripted drawer/guesser bots, an LLM guesser via OpenRouter, and the demo/race commands.",
+  "bin": {
+    "ap-bots": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "library"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -b && tsc -p tsconfig.test.json",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "gen:library": "node dist/library/generate.js",
+    "demo": "node dist/cli.js demo",
+    "race": "node dist/cli.js race"
+  },
+  "dependencies": {
+    "@pictionary/engine": "workspace:*",
+    "@pictionary/protocol": "workspace:*",
+    "@pictionary/render": "workspace:*",
+    "@pictionary/sdk": "workspace:*",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@pictionary/server": "workspace:*",
+    "vitest": "5.0.5"
+  }
+}
