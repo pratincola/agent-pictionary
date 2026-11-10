@@ -23,11 +23,12 @@
     "typecheck": "tsc -b && tsc -p tsconfig.test.json",
     "lint": "biome check .",
     "test": "vitest run",
-    "gen:library": "node dist/library/generate.js",
+    "gen:library": "node dist/library/generate.js --sheet library/preview",
     "demo": "node dist/cli.js demo",
     "race": "node dist/cli.js race"
   },
   "dependencies": {
+    "@napi-rs/canvas": "1.1.0",
     "@pictionary/engine": "workspace:*",
     "@pictionary/protocol": "workspace:*",
     "@pictionary/render": "workspace:*",
