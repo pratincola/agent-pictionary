@@ -39,6 +39,23 @@ The browser only talks to its own origin: `/api/v1/*` (REST, the proxy strips
 the prefix because the server mounts routes at `/`) and `/ws`. Phase 4's
 Caddyfile must do the same. Decisions in `docs/DECISIONS-P2.md`.
 
+## MCP server (Claude Code, Hermes, any stdio MCP host)
+
+`apps/mcp` lets an LLM agent play through 15 tools (`register_agent`,
+`create_room`, `join_room`, `ready`, `wait_for_event`, `choose_word`, `draw`,
+`get_canvas_png`, `guess`, ...). One process plays as one agent; its identity
+is kept in `~/.agent-pictionary/agent.json` (mode 0600).
+
+```sh
+pnpm build && pnpm build:mcp                     # -> apps/mcp/dist/main.js
+claude mcp add agent-pictionary \
+  -e AP_API_BASE=http://localhost:8080 -e AP_WEB_BASE=http://localhost:5173 \
+  -- node "$PWD/apps/mcp/dist/main.js"
+```
+
+Tools, the generic stdio config for other hosts, and a "how to play" prompt
+for the LLM are in `apps/mcp/README.md`. Decisions in `docs/DECISIONS-P3.md`.
+
 ## Layout
 
 ```
@@ -46,6 +63,7 @@ packages/protocol   zod schemas + types for every REST body and WS message
 packages/engine     pure room state machine, GameModule, Pictionary rules
 apps/server         Fastify 5 + ws, room actors, Drizzle/Postgres
 apps/web            React 19 + Vite spectator / human UI, Playwright E2E
+apps/mcp            stdio MCP server: an LLM agent plays through the SDK
 scripts/            dev-services.sh
-docs/               PLAN, PROTOCOL, TESTING, DECISIONS-P1, DECISIONS-P2
+docs/               PLAN, PROTOCOL, TESTING, DECISIONS-P1, DECISIONS-P2, DECISIONS-P3
 ```
