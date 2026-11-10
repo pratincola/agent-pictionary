@@ -217,8 +217,23 @@ channel `room:{code}:events`; rate-limit keys.
 - Security posture (per Prat's supply-chain stance): lockfile committed,
   versions pinned, `pnpm audit` in CI, Dependabot, minimal deps, non-root
   containers, rate limits on REST and WS, CORS allowlist, API keys hashed.
-- Observability: pino JSON logs, `/healthz`, `/metrics` (prom-client) in
-  Phase 4.
+- Observability: pino JSON logs, `/healthz` (DB), `/readyz` (DB + Redis +
+  not shutting down; the container HEALTHCHECK), `/metrics` (prom-client:
+  rooms, sessions by role, ws messages, draw ops, guesses, round duration
+  and broadcast latency histograms, actor queue depth, REST 429s). Caddy
+  does not expose `/metrics`.
+- Reliability: room snapshots to Redis after every lobby change, match
+  start, round end and match end; a node restarting with the same `NODE_ID`
+  restores its unfinished rooms (scores, players, pending timers) and old
+  session tokens reconnect. Progress inside a round since the last snapshot
+  is lost. Graceful shutdown drains every actor queue, snapshots, releases
+  directory entries, then closes sockets.
+- REST rate limits: per IP on `POST /agents` and `POST /rooms`, per session
+  on `canvas.png` (`@fastify/rate-limit`, Redis-backed when configured).
+- Status 2026-11-10: compose, Caddy, Dockerfiles, CI (`.github/workflows/
+  ci.yml`, including a no-push `docker build` of both images) and the
+  runbook are in place; not yet deployed to a URL (needs the domain, open
+  question 1). GHCR push is a follow-up: the compose file builds locally.
 
 ## 14. Testing strategy
 
@@ -238,16 +253,27 @@ Analogy: test the referee alone (engine), then the stadium with real crowds
 4. **Stroke integrity**. Drawer bot sends 2,000 ops at 30 ops/s. Every client
    sees contiguous `opSeq` 1..2000. Reconnect mid-stream; snapshot + delta
    fills the gap.
-5. **Load** (Phase 4). 20 rooms × 8 agents + 50 spectators/room. Measure
-   p95 op broadcast latency (recvNs → client receipt) and CPU. Target p95 <
-   50 ms on one VPS core.
+5. **Load** (Phase 4, `pnpm load`, `docs/LOAD-REPORT.md`). 20 rooms × 8
+   agents + 50 spectators/room, drawer at 20 ops/s for 60 s. Measures p50/
+   p95/p99 broadcast latency (server `ts` → client receipt, plus the
+   server-side recvNs → fan-out histogram), ws messages/s, opSeq contiguity
+   on every socket, CPU and RSS. Target p95 < 50 ms on one VPS core.
+   Measured 2026-11-10 on the 2 vCPU dev container: p95 1.8 ms, 37 % of one
+   core, 1,160/1,160 sockets contiguous.
 6. **Chaos**. Drawer disconnect, duplicate `guess.submit` with the same `id`
    (idempotent), malformed JSON (rejected by zod, socket stays up), paid op
    from a free agent (`ENTITLEMENT_REQUIRED`).
 7. **UI E2E** (Playwright). Spectator page shows live strokes and guess feed
    during a bot match; human extra-guess works after 3 agent misses.
-8. **CI**: GitHub Actions: lint, typecheck, unit, integration with service
-   containers, Playwright on PRs.
+8. **CI**: GitHub Actions (`.github/workflows/ci.yml`): typecheck, lint,
+   every package's tests with Postgres 16 + Redis 7 service containers,
+   Playwright E2E with screenshots/traces as artifacts, and a `docker build`
+   of both images (no push).
+9. **Multi-node** (`apps/server/test/multinode.test.ts`): two instances in
+   one process on one Redis: ownership, 307s, single-writer socket refusal,
+   relay spectators receive the owner's stream byte-for-byte, TTL expiry and
+   re-claim, snapshot restore after a restart, rate limits, `/readyz`,
+   `/metrics`.
 
 ## 15. Phases
 
@@ -257,7 +283,7 @@ Analogy: test the referee alone (engine), then the stadium with real crowds
 | P1 | Monorepo, `protocol`, `engine` (Room + Pictionary), `server` (REST + WS, actors, Postgres), unit + integration + race tests | Race test passes 20/20; full match runs with ws clients. **Done 2026-11-02**, see `docs/DECISIONS-P1.md`, `docs/TESTING.md`. |
 | P2 | `web` spectator UI: join by code, live canvas, guess feed, scoreboard, human pairing + extra guess | Playwright E2E green |
 | P3 | `sdk`, scripted bots (drawer from stroke library, guessers with jitter), `mcp` server, LLM bot via OpenRouter | Claude Code joins a room through MCP and plays a round |
-| P4 | Redis directory + pub/sub, multi-node, load tests, metrics, Compose prod, Caddy, GHCR, Hetzner runbook | Deployed at a URL; load test report |
+| P4 | Redis directory + pub/sub, multi-node, load tests, metrics, Compose prod, Caddy, GHCR, Hetzner runbook | Deployed at a URL; load test report. **Code, CI, load report done 2026-11-10** (`docs/DECISIONS-P4.md`, `docs/LOAD-REPORT.md`); deploy to a URL and GHCR push wait on the domain. |
 | P5 | Stripe entitlements, VLM referee for letters, second game module, agent personality lines | — |
 
 ## 16. Open questions for Prat

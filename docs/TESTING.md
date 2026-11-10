@@ -22,7 +22,11 @@ DATABASE_URL=postgres://postgres@localhost:5433/pictionary_test
 REDIS_URL=redis://localhost:6380
 ```
 
-Redis is started for parity with Phase 4; Phase 1 tests do not use it.
+Only the multi-node test uses Redis (logical DB 7 on that instance, flushed
+at start; override with `TEST_REDIS_URL`). Every other test runs the server
+with the in-memory directory and bus, which is also what the server does when
+`REDIS_URL` is unset. Do not `export REDIS_URL` before running tests: any
+server a test builds without an explicit `redisUrl` would otherwise read it.
 
 ## One command
 
@@ -45,6 +49,7 @@ ops/s limit.
 | Integration | `apps/server/test/integration.test.ts` | `pnpm -F @pictionary/server test` | REST surface; 3 agents + paired human + spectator play all rounds over real sockets; rounds/guesses/draw_ops/scores/agent_stats rows equal the broadcasts. |
 | Race | `apps/server/test/race.test.ts` | `cd apps/server && pnpm exec vitest run test/race.test.ts` | 50 guessers fire the correct word in one tick, 20 runs (odd runs with 0–3 ms jitter) plus an interleaved wrong/right variant. Exactly one winner, byte-identical `round.ended` on 51 sockets, DB `winning_seq` = min seq among correct guesses, `recv_ns` monotone in `seq`. |
 | Stroke integrity | `apps/server/test/strokes.test.ts` | `cd apps/server && pnpm exec vitest run test/strokes.test.ts` | 2,000 ops at 30 ops/s; every client sees contiguous `opSeq` 1..2000; a client that drops mid-stream reconnects with its token, fills the gap via `GET /rooms/:code/ops?after=`, and ends with the same log. Also the `RATE_LIMITED` burst case. |
+| Multi-node | `apps/server/test/multinode.test.ts` | `cd apps/server && pnpm exec vitest run test/multinode.test.ts` | Two server instances (`test-A` on :3451, `test-B` on :3452) on one Redis. Room created on A is owned by A (`room:{code}`, `node:test-A` hash); `GET /rooms/:code` and player session creation on B answer 307 to A's REST base; an agent token for A's room is refused on B's socket; a spectator session on B gets `room.state` from A's snapshot and then every broadcast byte-identical to A's own spectator, pings answered locally, guesses refused; owner closing the room closes relay sockets (4404); a node that stops heartbeating loses its entry after `roomTtlMs` and re-claims when it resumes; a node restarting with the same `NODE_ID` (`test-C` on :3453) restores lobby players and match scores and old session tokens reconnect; finished rooms are not restored; `/readyz`, `/metrics` series, per-IP and per-session REST rate limits (429 + `ap_rest_rate_limited_total`). |
 | Chaos | `apps/server/test/chaos.test.ts` | `cd apps/server && pnpm exec vitest run test/chaos.test.ts` | Duplicate `guess.submit` id is idempotent; malformed JSON / schema violations / binary frames -> `BAD_REQUEST`, socket stays open; free agent `draw.erase` -> `ENTITLEMENT_REQUIRED`, admin grant unlocks live; drawer disconnect -> `drawer_left` after grace; drawer reconnect keeps the round; superseded sockets; ROOM_FULL / WRONG_PHASE at session creation; injected DB failure -> broadcast still happens, outbox row, retry lands the round. |
 
 Server tests set `validateOutgoing: true`, so every message the server emits
@@ -70,9 +75,37 @@ truncates every table at start (`resetDb`), so do not point it at real data.
   folders with each package's `tsconfig.test.json`.
 - `pnpm lint` runs Biome; `pnpm lint:fix` formats. Markdown is excluded.
 
-## CI (to add in Phase 4)
+## Load test (not part of `pnpm test`)
 
-GitHub Actions with Postgres and Redis service containers:
-`pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm lint`, `pnpm test`.
-The race and stroke tests are deterministic enough to run on every PR; keep
-them in the required set.
+```sh
+createdb -h /tmp -p 5433 -U postgres pictionary_load
+DATABASE_URL=postgres://postgres@localhost:5433/pictionary_load pnpm load
+# knobs (apps/bots `load` command):
+pnpm -F @pictionary/bots load --rooms 20 --agents 8 --spectators 50 --ops 20 --duration 60 --workers 4 --json /tmp/load.json
+pnpm -F @pictionary/bots load --base http://127.0.0.1:8080 ...   # against a running server
+```
+
+`pnpm load` builds, spawns `apps/server/dist/main.js` on `--port` (default
+3400, `LOAD_PORT`) with the REST rate limits raised, runs the client workers
+(raw `ws` sockets in worker threads), scrapes `GET /metrics` every 2 s, prints
+the report and exits 3 when p95 ≥ 50 ms or any socket saw an `opSeq` gap.
+Against a running server (`--base`) raise `RATE_LIMIT_AGENTS_PER_MIN` and
+`RATE_LIMIT_ROOMS_PER_MIN` first; the defaults (60 and 30 per minute per IP)
+stop a 20-room run from one machine. Numbers and method: `docs/LOAD-REPORT.md`.
+
+## CI
+
+`.github/workflows/ci.yml` runs on pushes to `main`, pull requests and manual
+dispatch:
+
+1. `test` job: Postgres 16 and Redis 7 service containers published on
+   5433/6380 (the same ports as `scripts/dev-services.sh`, so every default
+   URL works), `pnpm install --frozen-lockfile`, advisory `pnpm audit`,
+   `pnpm typecheck`, `pnpm lint`, `pnpm test` (every package, race and
+   stroke tests included), Chromium install, `pnpm test:e2e`, screenshots
+   and traces uploaded as the `playwright-<run>` artifact.
+2. `docker` job: `docker build` of `deploy/Dockerfile.server` and
+   `deploy/Dockerfile.web` (no push), a smoke run of the server image (prod
+   dependencies resolve, non-root) and `caddy validate` of the Caddyfile
+   inside the web image. The development container has no Docker daemon, so
+   this job is where the images are actually exercised.
