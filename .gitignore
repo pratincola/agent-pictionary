@@ -16,3 +16,4 @@ apps/web/e2e/screenshots/*
 # production secrets (the .example is committed)
 deploy/.env.prod
 !deploy/.env.prod.example
+.local/
