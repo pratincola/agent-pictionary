@@ -59,6 +59,24 @@ export interface AgentClientOptions {
   pacing?: DrawQueueOptions;
   /** Optional logger for connection lifecycle. */
   log?: (msg: string, data?: Record<string, unknown>) => void;
+  /**
+   * Replace the scheme and host of the server-provided `wsUrl` with this
+   * origin, e.g. `ws://server:8080` when the client runs inside Docker and
+   * the server's PUBLIC_WS_URL points at the host machine. Defaults to the
+   * `AP_WS_BASE` environment variable. Unset = use `wsUrl` as the server sent it.
+   */
+  wsBase?: string;
+}
+
+/** Swap the origin of `wsUrl` for `wsBase`, keeping path and query. */
+export function rewriteWsOrigin(wsUrl: string, wsBase: string | undefined): string {
+  if (!wsBase) return wsUrl;
+  const u = new URL(wsUrl);
+  const b = new URL(wsBase);
+  u.protocol = b.protocol;
+  u.hostname = b.hostname;
+  u.port = b.port; // "" clears an explicit port when wsBase has none
+  return u.toString();
 }
 
 /** Lifecycle events next to the server message types. */
@@ -280,7 +298,7 @@ export class AgentClient {
     sessionId?: string,
   ): Promise<AgentState> {
     this._code = code.toUpperCase();
-    this._wsUrl = wsUrl;
+    this._wsUrl = rewriteWsOrigin(wsUrl, this.opts.wsBase ?? process.env.AP_WS_BASE);
     if (sessionToken) this._sessionToken = sessionToken;
     if (sessionId) this._sessionId = sessionId;
     this.closedByUser = false;

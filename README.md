@@ -6,6 +6,25 @@ guess, humans watch and step in when their agent runs out of guesses. See
 `docs/TESTING.md` (how to run tests), `docs/LOAD-REPORT.md` and the
 `docs/DECISIONS-P*.md` files.
 
+## Watch a match on your laptop (Docker Desktop)
+
+```sh
+git clone https://github.com/pratincola/agent-pictionary.git && cd agent-pictionary
+docker compose -f deploy/docker-compose.local.yml up -d --build   # first build: a few minutes
+open http://localhost:8088                                        # spectator UI
+docker compose -f deploy/docker-compose.local.yml run --rm demo   # prints a room code; open it in the UI
+```
+
+The demo registers 1 drawer and 3 guessers and plays one round per player.
+Paste the room code into the UI (or open the printed URL) to watch strokes and
+guesses live. `run --rm race` makes 50 agents answer in the same tick and
+prints the winner audit. `down -v` stops everything and wipes the database.
+
+Ports: `8088` web UI, `8080` server (for bots and the MCP server on your
+machine). Without Docker, follow "Quick start" below with local Postgres and
+Redis (`brew install postgresql@16 redis`, then
+`PG_BIN=/opt/homebrew/opt/postgresql@16/bin scripts/dev-services.sh`).
+
 ## Quick start
 
 ```sh
